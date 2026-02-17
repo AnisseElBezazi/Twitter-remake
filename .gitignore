@@ -1,0 +1,29 @@
+.DS_Store
+Thumbs.db
+
+.idea/
+.vscode/
+*.sublime-workspace
+.env
+
+/vendor/
+/node_modules/
+
+
+# Ignorer le contenu de avatars mais garder le dossier !
+assets/uploads/avatars/*
+!assets/uploads/avatars/.gitkeep
+
+# Same pour posts
+assets/uploads/posts/*
+!assets/uploads/posts/.gitkeep
+
+# Same pour banner
+assets/uploads/banner/*
+!assets/uploads/banner/.gitkeep
+
+# Same pour banner
+assets/img/*
+!assets/img/.gitkeep
+
+config/database.php

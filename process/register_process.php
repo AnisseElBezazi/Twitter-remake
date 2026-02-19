@@ -31,11 +31,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($email)) {
         $errors[] = "L'email est requis";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Merci de rentrer un e-mail valide";
     }
 
-    if (empty($password)) {
-        $errors[] = "Le mot de passe est requis";
+if (empty($password)) {
+    $errors[] = "Le mot de passe est requis.";
+} else {
+    if (strlen($password) < 8) {
+        $errors[] = "Le mot de passe doit faire au moins 8 caractères.";
+    } elseif (!preg_match('/[A-Z]/', $password)) {
+        $errors[] = "Il faut au moins une lettre majuscule.";
+    } elseif (!preg_match('/[#?!@$%^&*-]/', $password)) {
+        $errors[] = "Il faut au moins un caractère spécial.";
     }
+}
 
 
     if (!empty($errors)) {

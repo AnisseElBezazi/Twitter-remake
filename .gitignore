@@ -26,4 +26,3 @@ assets/uploads/banner/*
 assets/img/*
 !assets/img/.gitkeep
 
-config/database.php

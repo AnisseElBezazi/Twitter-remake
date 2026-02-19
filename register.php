@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php
+session_start();
+require_once __DIR__ . '/includes/functions.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,6 +37,10 @@
         <input type="password" name="password" id="password" required>
         <br>
         <button type="submit">S'inscrire</button>
+        <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
+
+        <p>Déja un compte ? </p>
+        <a href="login.php">Se connecter</a>
 
     </form>
 

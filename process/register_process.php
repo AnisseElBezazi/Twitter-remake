@@ -2,8 +2,15 @@
 
 session_start();
 require_once '../config/database.php';
+require_once '../includes/functions.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!verify_csrf_token($_POST['csrf_token'] ?? '')) {
+        $_SESSION['error'] = 'Token CSRF invalide. Veuillez réessayer.';
+        header('Location: ../register.php');
+        exit;
+    }
+
     $pseudo = trim($_POST['pseudo'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';

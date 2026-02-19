@@ -1,5 +1,6 @@
 <?php
 require_once('./includes/security.php');
+require_once('./includes/functions.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +19,7 @@ require_once('./includes/security.php');
         <h1>Bienvenue, <?php echo htmlspecialchars($_SESSION['pseudo']); ?> !</h1>
 
         <form action="./process/logout.php" method="post">
+            <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
             <button type="submit">Se déconnecter</button>
         </form>
     <?php endif; ?>

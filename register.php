@@ -27,6 +27,9 @@ require_once __DIR__ . '/includes/functions.php';
 
     <form action="./process/register_process.php" method="post">
 
+        <label for="name">Nom & Prénom</label>
+        <input type="text" name="name" id="name" required>
+        <br>
         <label for="pseudo">Pseudo</label>
         <input type="text" name="pseudo" id="pseudo" required>
         <br>

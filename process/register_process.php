@@ -11,12 +11,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    $name = trim ($_POST['name'] ??'');
     $pseudo = trim($_POST['pseudo'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
 
     $errors = [];
+
+    if (empty($name)) {
+        $errors[] = "Les noms et prénoms sont obligatoires";
+    }
 
     if (empty($pseudo)) {
         $errors[] = 'Le pseudo est requis';
@@ -54,11 +59,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $passwordhash = password_hash($password, PASSWORD_DEFAULT);
 
-        $insertStmt = $pdo->prepare("INSERT INTO users (pseudo, email, password) VALUES (:pseudo, :email, :password)");
+        $insertStmt = $pdo->prepare("INSERT INTO users (pseudo, email, password, real_name) VALUES (:pseudo, :email, :password, :real_name)");
         $insertStmt->execute([
             ':pseudo' => $pseudo,
             ':email' => $email,
-            ':password' => $passwordhash
+            ':password' => $passwordhash,
+            ':real_name' => $name
         ]);
 
         $_SESSION['success'] = 'Inscription réussie';

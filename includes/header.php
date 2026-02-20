@@ -1,5 +1,4 @@
-<?php $current_page = basename($_SERVER['PHP_SELF']); 
-require_once './process/profil_fetch.php';?>
+<?php $current_page = basename($_SERVER['PHP_SELF']); ?>
 
 
 <nav class="left-header">

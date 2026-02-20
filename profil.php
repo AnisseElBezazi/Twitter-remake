@@ -2,38 +2,8 @@
 require_once('./includes/security.php');
 require_once('./includes/functions.php');
 require_once './config/database.php';
-
-$pseudo = $_SESSION['pseudo'];
-
-$stmt = $pdo->prepare('SELECT * FROM users WHERE pseudo = :pseudo');
-$stmt->execute([':pseudo' => $pseudo]);
-$user = $stmt->fetch();
-echo '<pre>';
-var_dump ($user);
-echo '<pre>';
-
-$id = $user['id'];
-
-
-$stmt = $pdo->prepare('SELECT COUNT(*) FROM posts WHERE user_id = :user_id');
-$stmt->execute([':user_id' => $id]);
-$nb_post = $stmt->fetchColumn();
-
-
-
-$pp = $user['avatar'];
-$dateDb = $user['created_at'];
-$date = new DateTime($dateDb);
-
-$mois = [
-    1 => 'Janvier', 2 => 'Février', 3 => 'Mars', 4 => 'Avril',
-    5 => 'Mai', 6 => 'Juin', 7 => 'Juillet', 8 => 'Août',
-    9 => 'Septembre', 10 => 'Octobre', 11 => 'Novembre', 12 => 'Décembre'
-];
-$numeroMois = (int)$date->format('m');
-$annee = $date->format('Y');
-
-$created = $mois[$numeroMois] . ' ' . $annee;
+require_once './process/data_fetch.php';
+require_once './process/profil_fetch.php';
 
 ?>
 <!DOCTYPE html>
@@ -41,48 +11,102 @@ $created = $mois[$numeroMois] . ' ' . $annee;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
-    <title>Profil</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Profil de <?= htmlspecialchars($realName) ?></title>
 </head>
-<body>
-    <div>
-        <div>
-            <svg width="32" height="18" viewBox="0 0 32 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M25 10H7C6.44 10 6 9.56 6 9C6 8.44 6.44 8 7 8H25C25.56 8 26 8.44 26 9C26 9.56 25.56 10 25 10Z" fill="black"/>
-<path d="M12 17C11.8688 17.0016 11.7388 16.9757 11.6183 16.9241C11.4977 16.8724 11.3893 16.7961 11.3 16.7L4.3 9.7C3.9 9.3 3.9 8.68 4.3 8.28L11.3 1.3C11.7 0.9 12.32 0.9 12.72 1.3C13.12 1.7 13.12 2.32 12.72 2.72L6.42 9.02L12.72 15.32C13.12 15.72 13.12 16.34 12.72 16.74C12.52 16.94 12.26 17.04 12.02 17.04L12 17Z" fill="black"/>
-</svg>
-<div>
-      <span><?= $pseudo ?></span>
-      <span><?= $nb_post ?> posts</span>
-</div>
- <svg
-              class="icone-user"
-              width="27"
-              height="32"
-              viewBox="0 0 32 37"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1 36V33.5C1 30.8478 2.05357 28.3043 3.92893 26.4289C5.8043 24.5536 8.34784 23.5 11 23.5H21C23.6522 23.5 26.1957 24.5536 28.0711 26.4289C29.9464 28.3043 31 30.8478 31 33.5V36M23.5 8.5C23.5 10.4891 22.7098 12.3968 21.3033 13.8033C19.8968 15.2098 17.9891 16 16 16C14.0109 16 12.1032 15.2098 10.6967 13.8033C9.29018 12.3968 8.5 10.4891 8.5 8.5C8.5 6.51088 9.29018 4.60322 10.6967 3.1967C12.1032 1.79018 14.0109 1 16 1C17.9891 1 19.8968 1.79018 21.3033 3.1967C22.7098 4.60322 23.5 6.51088 23.5 8.5Z"
-                stroke-width="3"
-                stroke-linecap="round"
-              />
-            </svg>
-          
-        </div>
-    </div>
+<body class="body">
     
+    <?php require './includes/header.php'; ?>
 
-<img src="assets/upload/avatars/<?= $pp ?>" alt="" style="width: 80px; height: 120px;">
-<img src="assets/upload/banner/<?= $pp ?>" alt="" style="width: 80px; height: 120px;">
-<button>Edit profile</button>
-<p><?= $pseudo ?></p>
-<p>@<?= $pseudo ?></p>
+    <main class="milieu-page">
+        <div class="top-profil">
+            <a href="index.php" class="back-button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 11H7.83L13.42 5.41L12 4L4 12L12 20L13.41 18.59L7.83 13H20V11Z" fill="white"/>
+                </svg>
+            </a>
+            <div class="user-info-top">
+                <h3><?= htmlspecialchars($realName) ?></h3>
+                <p><?= $nb_post ?> posts</p>
+            </div>
+        </div>
 
-<p>Joined <?= $created ?></p>
+        <div class="hero-profil">
+            <img class="banner" src="assets/upload/banner/<?= htmlspecialchars($banner) ?>">
+            <div class="avatar-container">
+                <img class="avatar" src="assets/upload/avatars/<?= htmlspecialchars($pp) ?>">
+            </div>
+        </div>
 
-<p>Posts</p>
-<p>Likes</p>
+        <div class="actions-profil">
+            <button class="edit-btn">Éditer profil</button>
+        </div>
+
+        <div class="details-profil">
+            <h2 class="name"><?= htmlspecialchars($realName) ?></h2>
+            <p class="pseudo">@<?= htmlspecialchars($pseudo) ?></p>
+            <p class="bio"><?= htmlspecialchars($bio) ?></p>
+
+            
+        </div>
+
+        <div class="tabs-profil">
+            <div class="tab active" onclick="switchTab('posts')">Posts</div>
+            <div class="tab" onclick="switchTab('likes')">J'aime</div>
+        </div>
+
+        <section id="posts-section" class="posts">
+    <?php if (!empty($user_posts)): ?>
+        <?php foreach ($user_posts as $post): ?>
+            <div class="post">
+                <div class="left-post">
+                    <div class="pp">
+                        <img src="assets/upload/avatars/<?= htmlspecialchars($post['avatar']) ?>" alt="avatar">
+                    </div>
+                </div>
+                <div class="right-post">
+                    <div class="pseudo">
+                        <p class="name"><?= htmlspecialchars($post['real_name']) ?></p>
+                        <p class="real-name">@<?= htmlspecialchars($post['pseudo']) ?></p>
+                        <p class="time">. Salon : <?= htmlspecialchars($post['movie_name'] ?? 'Général') ?></p>
+                    </div>
+                    <div class="bottom-post">
+                        <p class="message">
+                            <?= nl2br(htmlspecialchars($post['content'])) ?>
+                        </p>
+                        <?php if (!empty($post['image_path'])): ?>
+                            <div class="image-post">
+                                <img src="assets/upload/posts/<?= htmlspecialchars($post['image_path']) ?>"/>
+                            </div>
+                        <?php endif; ?>
+                        <div class="align-button">
+                            <div class="comment">
+                                <svg width="16" height="16" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.99169 15.3417C2.13873 15.7126 2.17147 16.119 2.08569 16.5087L1.02069 19.7987C0.986375 19.9655 0.995248 20.1384 1.04647 20.3008C1.09769 20.4633 1.18955 20.61 1.31336 20.727C1.43716 20.844 1.5888 20.9274 1.75389 20.9693C1.91898 21.0113 2.09205 21.0104 2.25669 20.9667L5.66969 19.9687C6.03741 19.8958 6.41822 19.9276 6.76869 20.0607C8.90408 21.0579 11.3231 21.2689 13.5988 20.6564C15.8746 20.0439 17.861 18.6473 19.2074 16.7131C20.5538 14.7788 21.1738 12.4311 20.958 10.0842C20.7422 7.73738 19.7044 5.54216 18.0278 3.88589C16.3511 2.22962 14.1434 1.21873 11.7941 1.03159C9.44475 0.844449 7.10483 1.49308 5.18713 2.86303C3.26944 4.23299 1.89722 6.23624 1.31258 8.51933C0.727946 10.8024 0.96846 13.2186 1.99169 15.3417Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <p>0</p>
+                            </div>
+                            <div class="like">
+                                <svg width="15" height="14" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17.513 9.58341L10.013 17.0114L2.513 9.58341C2.0183 9.10202 1.62864 8.52342 1.36854 7.88404C1.10845 7.24466 0.983558 6.55836 1.00173 5.86834C1.01991 5.17832 1.18076 4.49954 1.47415 3.87474C1.76755 3.24994 2.18713 2.69266 2.70648 2.23799C3.22583 1.78331 3.8337 1.4411 4.49181 1.23289C5.14991 1.02468 5.844 0.954991 6.53036 1.02821C7.21673 1.10143 7.8805 1.31596 8.47987 1.65831C9.07925 2.00066 9.60124 2.46341 10.013 3.01741C10.4265 2.46743 10.9491 2.00873 11.5481 1.67001C12.1471 1.3313 12.8095 1.11986 13.4939 1.04893C14.1784 0.977998 14.8701 1.04911 15.5258 1.2578C16.1815 1.46649 16.787 1.80828 17.3045 2.26177C17.8221 2.71526 18.2404 3.27069 18.5334 3.8933C18.8264 4.51591 18.9877 5.19229 19.0073 5.88012C19.0269 6.56794 18.9043 7.2524 18.6471 7.89066C18.39 8.52891 18.0039 9.10723 17.513 9.58941" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <p>0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p class="msg-vide" style="color: gray; padding: 20px; text-align: center;">Aucun post pour le moment.</p>
+    <?php endif; ?>
+</section>
+<section id="likes-section" class="posts" style="display: none;">
+    <p class="msg-vide" >Vous n'avez encore rien liké.</p>
+</section>
+    </main>
+
+    <?php require './includes/nav-right.php'; ?>
+    <script src="assets/js/script-tabs.js"></script>
 </body>
 </html>

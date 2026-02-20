@@ -12,6 +12,12 @@
   overflow: hidden;
 }
 
+.msg-vide {
+  color: grey;
+  padding: 20px;
+  text-align: center;
+}
+
 .milieu-page::-webkit-scrollbar,
 .droite-page::-webkit-scrollbar {
   display: none;
@@ -67,7 +73,7 @@ li {
 }
 .left-header .navigation .link:hover {
   border-radius: 999px;
-  background-color: #131414;
+  background-color: #141515;
   cursor: pointer;
 }
 .left-header .navigation .link svg {
@@ -466,6 +472,141 @@ li {
 }
 .connexion-body .container-form .formulaire .signup-link a:hover {
   text-decoration: underline;
+}
+
+.milieu-page .top-profil {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #000000;
+  border-bottom: 1px solid #3b4044;
+}
+.milieu-page .top-profil .back-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  transition: 0.2s;
+}
+.milieu-page .top-profil .back-button:hover {
+  background-color: #141515;
+}
+.milieu-page .top-profil .user-info-top h3 {
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+.milieu-page .top-profil .user-info-top p {
+  color: #71767b;
+  font-size: 0.85rem;
+}
+.milieu-page .hero-profil {
+  position: relative;
+  width: 100%;
+  height: 200px;
+}
+.milieu-page .hero-profil .banner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.milieu-page .hero-profil .avatar-container {
+  position: absolute;
+  bottom: -65px;
+  left: 20px;
+}
+.milieu-page .hero-profil .avatar-container .avatar {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 4px solid #000000;
+  object-fit: cover;
+}
+.milieu-page .actions-profil {
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px 20px;
+}
+.milieu-page .actions-profil .edit-btn {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid #3b4044;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.milieu-page .actions-profil .edit-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.milieu-page .details-profil {
+  padding: 0 20px 20px 20px;
+}
+.milieu-page .details-profil .name {
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+.milieu-page .details-profil .pseudo {
+  color: #71767b;
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+}
+.milieu-page .details-profil .bio {
+  color: #ffffff;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin-bottom: 15px;
+}
+.milieu-page .details-profil .stats {
+  display: flex;
+  gap: 20px;
+  color: #71767b;
+  font-size: 0.9rem;
+}
+.milieu-page .details-profil .stats .bold {
+  color: #ffffff;
+  font-weight: bold;
+}
+.milieu-page .tabs-profil {
+  display: flex;
+  border-bottom: 1px solid #3b4044;
+}
+.milieu-page .tabs-profil .tab {
+  flex: 1;
+  text-align: center;
+  padding: 15px 0;
+  color: #a0a0a0;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.milieu-page .tabs-profil .tab:hover {
+  background-color: #141515;
+}
+.milieu-page .tabs-profil .tab.active {
+  color: #ffffff;
+  position: relative;
+}
+.milieu-page .tabs-profil .tab.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 4px;
+  background-color: #e50914;
+  border-radius: 999px;
 }
 
 /*# sourceMappingURL=style.css.map */

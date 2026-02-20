@@ -3,6 +3,7 @@ require_once('./includes/security.php');
 require_once('./includes/functions.php');
 require_once './config/database.php';
 require_once './process/data_fetch.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -99,7 +100,7 @@ require './includes/header.php';
             </div>
         <?php endforeach; ?>
     <?php else: ?>
-        <p style="color: gray; padding: 20px; text-align: center;">Aucun message dans le flux pour le moment.</p>
+        <p class="msg-vide">Aucun message dans le flux pour le moment.</p>
     <?php endif; ?>
 </section>
     </main>

@@ -1,8 +1,13 @@
+<?php $current_page = basename($_SERVER['PHP_SELF']); 
+require_once './process/profil_fetch.php';?>
+
+
 <nav class="left-header">
       <div>
         <div class="logo">FlixThread</div>
         <ul class="navigation">
-          <li class="link active">
+            <a href="index.php" style="text-decoration: none; color: inherit;">
+          <li class="link <?= ($current_page == 'index.php') ? 'active' : '' ?>">
             <svg
               class="icone-maison"
               width="27"
@@ -20,6 +25,7 @@
             </svg>
             <h3>Accueil</h3>
           </li>
+            </a>
           <li class="link">
             <svg
               class="icone-loupe"
@@ -39,7 +45,7 @@
             <h3>Explorer</h3>
           </li>
           <a href="profil.php" style="text-decoration: none; color: inherit;">
-          <li class="link profil">
+          <li class="link profil <?= ($current_page == 'profil.php') ? 'active' : '' ?>">
              
             <svg
               class="icone-user"
@@ -65,11 +71,11 @@
 
       <div class="compte-deconnexion">
         <div class="pp">
-          <img src="assets/upload/avatars/profil-picture.jpg" alt="Profil-picture" />
+          <img class="avatar" src="assets/upload/avatars/<?= htmlspecialchars($pp) ?>">
         </div>
         <div class="pseudo">
-          <p class="name">Anisse E.</p>
-          <p class="real-name">@anisseel</p>
+          <p class="name"><?= htmlspecialchars($realName) ?></p>
+          <p class="real-name">@<?= htmlspecialchars($pseudo) ?></p>
         </div>
        <form action="./process/logout.php" method="POST" style="display: flex; align-items: center; margin: 0;">
   <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">

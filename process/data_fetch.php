@@ -1,46 +1,40 @@
 <?php
+// 1. Récupération des films pour la barre latérale
 $query = $pdo->query("SELECT * FROM movies ORDER BY created_at DESC");
 $movies = $query->fetchAll(PDO::FETCH_ASSOC);
-$movieId = isset($_GET['movie_id']) ? (int)$_GET['movie_id'] : null;
 
+$movieId = isset($_GET['movie_id']) ? (int)$_GET['movie_id'] : null;
+$currentUserId = $_SESSION['user_id'];
+
+// 2. Préparation de la requête de base (Posts + Auteur + Salon + Compteur Likes + Ton Like)
+$sql = "
+    SELECT p.*, u.pseudo, u.real_name, u.avatar, m.title as movie_name,
+           (SELECT COUNT(*) FROM likes WHERE post_id = p.id) as like_count,
+           (SELECT COUNT(*) FROM likes WHERE post_id = p.id AND user_id = :current_user_id) as user_liked
+    FROM posts p
+    JOIN users u ON p.user_id = u.id
+    LEFT JOIN movies m ON p.movie_id = m.id
+";
+
+// 3. Filtrage par salon ou affichage global
 if ($movieId) {
-    $stmt = $pdo->prepare("
-        SELECT p.*, u.pseudo, u.real_name, u.avatar, m.title as movie_name 
-        FROM posts p
-        JOIN users u ON p.user_id = u.id
-        LEFT JOIN movies m ON p.movie_id = m.id
-        WHERE p.movie_id = ?
-        ORDER BY p.created_at DESC
-    ");
-    $stmt->execute([$movieId]);
+    $stmt = $pdo->prepare($sql . " WHERE p.movie_id = :movie_id ORDER BY p.created_at DESC");
+    $stmt->execute([
+        ':current_user_id' => $currentUserId,
+        ':movie_id' => $movieId
+    ]);
 } else {
-    
-    $stmt = $pdo->query("
-        SELECT p.*, u.pseudo, u.real_name, u.avatar, m.title as movie_name 
-        FROM posts p
-        JOIN users u ON p.user_id = u.id
-        LEFT JOIN movies m ON p.movie_id = m.id
-        ORDER BY p.created_at DESC
-    ");
+    $stmt = $pdo->prepare($sql . " ORDER BY p.created_at DESC");
+    $stmt->execute([':current_user_id' => $currentUserId]);
 }
+
 $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-
-
-
-
+// 4. Gestion du titre dynamique du salon
 $currentMovieTitle = "Général";
-
 if ($movieId) {
     $stmt_title = $pdo->prepare("SELECT title FROM movies WHERE id = ?");
     $stmt_title->execute([$movieId]);
     $current_movie = $stmt_title->fetch(PDO::FETCH_ASSOC);
-    
-    if ($current_movie) {
-        $currentMovieTitle = "Salon : " . $current_movie['title'];
-    } else {
-        $currentMovieTitle = "Salon introuvable";
-    }
+    $currentMovieTitle = $current_movie ? "Salon : " . $current_movie['title'] : "Salon introuvable";
 }
-
-?>

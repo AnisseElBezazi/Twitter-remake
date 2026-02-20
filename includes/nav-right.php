@@ -9,21 +9,21 @@
     </div>
 
     <div class="list-film">
-    <h3 class="title">Salons Populaires</h3>
+        <h3 class="title">Salons Populaires</h3>
 
-    <?php if (!empty($movies)): ?>
-        <?php foreach ($movies as $movie): ?>
-            <a href="index.php?movie_id=<?= $movie['id'] ?>" class="card-link" style="text-decoration: none; color: inherit;">
-                <div class="card">
-                    <h4 class="title"><?= htmlspecialchars($movie['title']) ?></h4>
-                    <div class="affiche">
-                        <img src="assets/img/<?= htmlspecialchars($movie['poster_path']) ?>" alt="<?= htmlspecialchars($movie['title']) ?>" />
+        <?php if (!empty($movies)): ?>
+            <?php foreach ($movies as $movie): ?>
+                <a href="index.php?movie_id=<?= $movie['id'] ?>" class="card-link" style="text-decoration: none; color: inherit;">
+                    <div class="card">
+                        <h4 class="title"><?= htmlspecialchars($movie['title']) ?></h4>
+                        <div class="affiche">
+                            <img src="assets/img/<?= htmlspecialchars($movie['poster_path']) ?>" alt="<?= htmlspecialchars($movie['title']) ?>" />
+                        </div>
                     </div>
-                </div>
-            </a>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <p class="msg-vide">Aucun salon disponible pour le moment.</p>
-    <?php endif; ?>
-</div>
+                </a>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p class="msg-vide">Aucun salon disponible pour le moment.</p>
+        <?php endif; ?>
+    </div>
 </section>

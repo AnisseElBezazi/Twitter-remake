@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : ven. 20 fév. 2026 à 15:13
+-- Généré le : ven. 20 fév. 2026 à 18:37
 -- Version du serveur : 8.4.3
 -- Version de PHP : 8.3.16
 
@@ -99,7 +99,9 @@ INSERT INTO `posts` (`id`, `user_id`, `movie_id`, `content`, `image_path`, `crea
 (1, 1, 1, 'Franchement la saison 2 d\'Arcane est une masterclass visuelle !', NULL, '2026-02-19 20:58:32'),
 (2, 3, 2, 'Est-ce que quelqu\'un sait quand sortent les prochains chapitres ?', NULL, '2026-02-19 20:58:32'),
 (3, 3, 3, 'Je viens de revoir Memento, je n\'ai toujours rien compris à la fin...', 'img-test.png', '2026-02-19 20:58:32'),
-(4, 4, NULL, 'Salam les rhey', NULL, '2026-02-20 15:46:57');
+(4, 4, NULL, 'Salam les rhey', NULL, '2026-02-20 15:46:57'),
+(5, 1, NULL, 'Test', NULL, '2026-02-20 18:46:35'),
+(6, 1, NULL, 'dssqdsq', NULL, '2026-02-20 19:03:20');
 
 -- --------------------------------------------------------
 
@@ -117,7 +119,7 @@ CREATE TABLE `users` (
   `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'profil-picture.jpg',
   `bio` text,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `banner` varchar(255) NOT NULL DEFAULT 'banner_default.png'
+  `banner` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'banner_default.jpg'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -125,10 +127,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `real_name`, `pseudo`, `email`, `password`, `role`, `avatar`, `bio`, `created_at`, `banner`) VALUES
-(1, 'Anisse', 'anisseel', 'anisse.elbezazi@gmail.com', '$2y$10$u3oE5iIKfb5sWz2G1s3vv.E0hfUpYejwcmpxhRD/bW1HmZVSVIKyC', 'user', 'profil-picture.jpg', NULL, '2026-02-19 20:28:37', 'banner_default.png'),
-(2, 'Jinx', 'Jinx', 'jinx@zaun.com', 'password_hash', 'user', 'profil-picture.jpg', NULL, '2026-02-19 20:58:32', 'banner_default.png'),
-(3, '', 'sertyujkujhgfbdvcs', 'quefjkrgbhfkv@gmail.com', '$2y$10$nklVBlRbyPL2FThNAzvyT.WYCQXrE/tW9pr/krssU9UL/tHnmln/O', 'user', 'profil-picture.jpg', NULL, '2026-02-20 09:03:27', 'banner_default.png'),
-(4, 'Booba', 'B2O', 'Booba@gmail.com', '$2y$10$anb/r7ebhaIGbE0AYIpeIu1mo2afak6XSIWT3bThumws.AlWtJ1oa', 'user', 'profil-picture.jpg', NULL, '2026-02-20 15:44:35', 'banner_default.png');
+(1, 'Anisse', 'anisseel', 'anisse.elbezazi@gmail.com', '$2y$10$u3oE5iIKfb5sWz2G1s3vv.E0hfUpYejwcmpxhRD/bW1HmZVSVIKyC', 'user', 'profil-picture.jpg', NULL, '2026-02-19 20:28:37', 'banner_default.jpg'),
+(2, 'Jinx', 'Jinx', 'jinx@zaun.com', 'password_hash', 'user', 'profil-picture.jpg', NULL, '2026-02-19 20:58:32', 'banner_default.jpg'),
+(3, '', 'sertyujkujhgfbdvcs', 'quefjkrgbhfkv@gmail.com', '$2y$10$nklVBlRbyPL2FThNAzvyT.WYCQXrE/tW9pr/krssU9UL/tHnmln/O', 'user', 'profil-picture.jpg', NULL, '2026-02-20 09:03:27', 'banner_default.jpg'),
+(4, 'Booba', 'B2O', 'Booba@gmail.com', '$2y$10$anb/r7ebhaIGbE0AYIpeIu1mo2afak6XSIWT3bThumws.AlWtJ1oa', 'user', 'Booba.jpg', NULL, '2026-02-20 15:44:35', 'banner_default.jpg');
 
 --
 -- Index pour les tables déchargées
@@ -191,7 +193,7 @@ ALTER TABLE `movies`
 -- AUTO_INCREMENT pour la table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `users`

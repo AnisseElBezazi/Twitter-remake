@@ -23,7 +23,7 @@
             </a>
         <?php endforeach; ?>
     <?php else: ?>
-        <p style="color: #71767b; padding: 20px;">Aucun salon disponible pour le moment.</p>
+        <p class="msg-vide">Aucun salon disponible pour le moment.</p>
     <?php endif; ?>
 </div>
 </section>

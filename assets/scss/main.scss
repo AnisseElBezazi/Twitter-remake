@@ -14,6 +14,11 @@
   font-style: normal;
   overflow: hidden;
 }
+.msg-vide {
+  color: grey;
+  padding: 20px;
+  text-align: center;
+}
 
 .milieu-page,
 .droite-page {
@@ -508,6 +513,166 @@ li {
           &:hover {
             text-decoration: underline;
           }
+        }
+      }
+    }
+  }
+}
+
+// Page profil
+.milieu-page {
+  .top-profil {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: $noir;
+    border-bottom: 1px solid $border;
+
+    .back-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 9999px;
+      transition: 0.2s;
+      &:hover {
+        background-color: $hover;
+      }
+    }
+
+    .user-info-top {
+      h3 {
+        color: $white;
+        font-size: 1.3rem;
+        font-weight: bold;
+      }
+      p {
+        color: $texttime;
+        font-size: 0.85rem;
+      }
+    }
+  }
+
+  .hero-profil {
+    position: relative;
+    width: 100%;
+    height: 200px;
+
+    .banner {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .avatar-container {
+      position: absolute;
+      bottom: -65px;
+      left: 20px;
+
+      .avatar {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        border: 4px solid $noir;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .actions-profil {
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px 20px;
+
+    .edit-btn {
+      background: transparent;
+      color: $white;
+      border: 1px solid $border;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+
+  .details-profil {
+    padding: 0 20px 20px 20px;
+
+    .name {
+      color: $white;
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin-bottom: 2px;
+    }
+
+    .pseudo {
+      color: $texttime;
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+    }
+
+    .bio {
+      color: $white;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      margin-bottom: 15px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 20px;
+      color: $texttime;
+      font-size: 0.9rem;
+
+      .bold {
+        color: $white;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .tabs-profil {
+    display: flex;
+    border-bottom: 1px solid $border;
+
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 15px 0;
+      color: $textinactif;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: $hover;
+      }
+
+      &.active {
+        color: $white;
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 100%;
+          height: 4px;
+          background-color: $primary;
+          border-radius: 999px;
         }
       }
     }

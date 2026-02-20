@@ -38,7 +38,6 @@ try {
     $redirect = $movieId ? "?movie_id=" . $movieId : "";
     header("Location: ../index.php" . $redirect);
     exit();
-
 } catch (PDOException $e) {
     die("Erreur SQL : " . $e->getMessage());
 }

@@ -20,36 +20,54 @@ $realName = trim($_POST['real_name'] ?? '');
 try {
     $stmt = $pdo->prepare("UPDATE users SET bio = :bio, real_name = :real_name WHERE id = :id");
     $stmt->execute([
-        ':bio' => $bio, 
-        ':real_name' => $realName, 
+        ':bio' => $bio,
+        ':real_name' => $realName,
         ':id' => $userId
     ]);
 } catch (PDOException $e) {
-    die("Erreur SQL lors de la mise à jour des infos : " . $e->getMessage());
+    die("Erreur lors de la mise à jour.");
 }
 
 $avatarDir = '../assets/upload/avatars/';
 $bannerDir = '../assets/upload/banner/';
+$allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+$maxSize = 2 * 1024 * 1024; // 2 Mo pour éviter de saturer le serveur (DDoS)
 
-if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
-    $ext = pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION);
-    $avatarName = $pseudo . '_avatar.' . $ext;
-    
-    if (move_uploaded_file($_FILES['avatar']['tmp_name'], $avatarDir . $avatarName)) {
-        $stmt = $pdo->prepare("UPDATE users SET avatar = :avatar WHERE id = :id");
-        $stmt->execute([':avatar' => $avatarName, ':id' => $userId]);
-        $_SESSION['avatar'] = $avatarName;
+
+$handleUpload = function ($fileKey, $targetDir, $nameSuffix) use ($allowedExtensions, $maxSize, $pseudo) {
+    if (isset($_FILES[$fileKey]) && $_FILES[$fileKey]['error'] === UPLOAD_ERR_OK) {
+
+        if ($_FILES[$fileKey]['size'] > $maxSize) return false;
+
+
+        $ext = strtolower(pathinfo($_FILES[$fileKey]['name'], PATHINFO_EXTENSION));
+        if (!in_array($ext, $allowedExtensions)) return false;
+
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mimeType = finfo_file($finfo, $_FILES[$fileKey]['tmp_name']);
+
+        if (strpos($mimeType, 'image/') !== 0) return false;
+
+        $finalName = $pseudo . $nameSuffix . '.' . $ext;
+        if (move_uploaded_file($_FILES[$fileKey]['tmp_name'], $targetDir . $finalName)) {
+            return $finalName;
+        }
     }
+    return false;
+};
+
+$newAvatar = $handleUpload('avatar', $avatarDir, '_avatar');
+if ($newAvatar) {
+    $stmt = $pdo->prepare("UPDATE users SET avatar = :avatar WHERE id = :id");
+    $stmt->execute([':avatar' => $newAvatar, ':id' => $userId]);
+    $_SESSION['avatar'] = $newAvatar;
 }
 
-if (isset($_FILES['banner']) && $_FILES['banner']['error'] === UPLOAD_ERR_OK) {
-    $ext = pathinfo($_FILES['banner']['name'], PATHINFO_EXTENSION);
-    $bannerName = $pseudo . '_banner.' . $ext;
-    
-    if (move_uploaded_file($_FILES['banner']['tmp_name'], $bannerDir . $bannerName)) {
-        $stmt = $pdo->prepare("UPDATE users SET banner = :banner WHERE id = :id");
-        $stmt->execute([':banner' => $bannerName, ':id' => $userId]);
-    }
+
+$newBanner = $handleUpload('banner', $bannerDir, '_banner');
+if ($newBanner) {
+    $stmt = $pdo->prepare("UPDATE users SET banner = :banner WHERE id = :id");
+    $stmt->execute([':banner' => $newBanner, ':id' => $userId]);
 }
 
 header("Location: ../profil.php");

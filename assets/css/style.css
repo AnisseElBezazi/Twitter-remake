@@ -1,7 +1,7 @@
-@import "../../node_modules/destyle.css/destyle.css";
+@import '../../node_modules/destyle.css/destyle.css';
 @import url("https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Bebas+Neue&display=swap");
 .body {
-  padding: 0px 120px;
+  padding: 0px 5%;
   display: flex;
   background: #0f0f0f;
   border-top: 1px solid #71767b;

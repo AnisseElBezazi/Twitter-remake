@@ -1,15 +1,15 @@
-@use "./mixin" as *;
-@import "../../node_modules/destyle.css/destyle.css";
+@use './mixin' as *;
+@import '../../node_modules/destyle.css/destyle.css';
 
-@import url("https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Bebas+Neue&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Bebas+Neue&display=swap');
 
 .body {
-  padding: 0px 120px;
+  padding: 0px 5%;
   display: flex;
   background: $fond;
   border-top: 1px solid $texttime;
   border-bottom: 1px solid $border;
-  font-family: "Arimo", sans-serif;
+  font-family: 'Arimo', sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
   overflow: hidden;
@@ -45,7 +45,7 @@ li {
   background: $fond;
   border-right: 1px solid $border;
   .logo {
-    font-family: "Bebas Neue", sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-weight: 700;
     font-style: normal;
     color: $primary;
@@ -197,7 +197,7 @@ li {
       padding: 15px;
 
       &::before {
-        content: "";
+        content: '';
         position: absolute;
         top: 0;
         left: 75px;
@@ -401,18 +401,14 @@ li {
         transition: 0.5s;
       }
       &::before {
-        content: "";
+        content: '';
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
         z-index: 10;
-        background: linear-gradient(
-          180deg,
-          rgba(255, 255, 255, 0),
-          rgba(0, 0, 0, 0.8)
-        );
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.8));
       }
       .title {
         color: $white;
@@ -441,7 +437,7 @@ li {
   align-items: center;
   background: $fond;
   color: $white;
-  font-family: "Arimo", sans-serif;
+  font-family: 'Arimo', sans-serif;
   margin: 0;
   padding: 0;
 
@@ -458,7 +454,7 @@ li {
     max-width: 450px;
 
     .logo {
-      font-family: "Bebas Neue", sans-serif;
+      font-family: 'Bebas Neue', sans-serif;
       font-weight: 700;
       color: $primary;
       font-size: 3rem;
@@ -679,7 +675,7 @@ li {
         position: relative;
 
         &::after {
-          content: "";
+          content: '';
           position: absolute;
           bottom: 0;
           left: 50%;

@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    $name = trim ($_POST['name'] ??'');
+    $name = trim($_POST['name'] ?? '');
     $pseudo = trim($_POST['pseudo'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
@@ -35,17 +35,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "Merci de rentrer un e-mail valide";
     }
 
-if (empty($password)) {
-    $errors[] = "Le mot de passe est requis.";
-} else {
-    if (strlen($password) < 8) {
-        $errors[] = "Le mot de passe doit faire au moins 8 caractères.";
-    } elseif (!preg_match('/[A-Z]/', $password)) {
-        $errors[] = "Il faut au moins une lettre majuscule.";
-    } elseif (!preg_match('/[#?!@$%^&*-]/', $password)) {
-        $errors[] = "Il faut au moins un caractère spécial.";
+    if (empty($password)) {
+        $errors[] = "Le mot de passe est requis.";
+    } else {
+        if (strlen($password) < 8) {
+            $errors[] = "Le mot de passe doit faire au moins 8 caractères.";
+        } elseif (!preg_match('/[A-Z]/', $password)) {
+            $errors[] = "Il faut au moins une lettre majuscule.";
+        } elseif (!preg_match('/[#?!@$%^&*-]/', $password)) {
+            $errors[] = "Il faut au moins un caractère spécial.";
+        }
     }
-}
 
 
     if (!empty($errors)) {
@@ -80,15 +80,12 @@ if (empty($password)) {
         $_SESSION['success'] = 'Inscription réussie';
         header('Location: ../index.php');
         exit;
-
     } catch (PDOException $e) {
         $_SESSION['error'] = 'Une erreur est survenue lors de l\'inscription';
         header('Location: ../register.php');
         exit;
     }
-
 } else {
     header('Location: ../register.php');
     exit;
 }
-?>

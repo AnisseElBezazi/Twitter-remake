@@ -14,7 +14,7 @@ require_once './process/data_fetch.php';
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body>
+<body class="body">
 
     <nav class="left-header">
       <div>

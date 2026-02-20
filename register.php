@@ -10,9 +10,10 @@ require_once __DIR__ . '/includes/functions.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
+     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body>
+<body class="connexion-body">
 
     <?php
     if (isset($_SESSION['error'])) {
@@ -25,25 +26,26 @@ require_once __DIR__ . '/includes/functions.php';
     }
     ?>
 
-    <form action="./process/register_process.php" method="post">
+<div class="container-form">
+    <div class="logo">FlixThread</div>
 
-        <label for="pseudo">Pseudo</label>
-        <input type="text" name="pseudo" id="pseudo" required>
-        <br>
-        <label for="email">E-mail</label>
-        <input type="email" name="email" id="email" required>
-        <br>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" required>
-        <br>
-        <button type="submit">S'inscrire</button>
+    <form class="formulaire" action="./process/register_process.php" method="post">
+        <h1 class="title">S'inscrire</h1>
+
+        <input class="input-formulaire" type="text" name="pseudo" id="pseudo" placeholder="Pseudo" required>
+        <input class="input-formulaire" type="email" name="email" id="email" placeholder="Entrez votre email" required>
+        <input class="input-formulaire" type="password" name="password" id="password" placeholder="Entrez votre mot de passe" required>
+        
         <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
+        
+        <button class="primary-button" type="submit">S'inscrire</button>
 
-        <p>Déja un compte ? </p>
-        <a href="login.php">Se connecter</a>
-
+        <div class="signup-link">
+            <p>Déjà un compte ?</p>
+            <a href="login.php">Connecter-vous</a>
+        </div>
     </form>
-
+</div>
 </body>
 
 </html>

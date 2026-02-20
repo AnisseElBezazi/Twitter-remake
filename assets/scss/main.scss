@@ -14,6 +14,7 @@ body {
   font-style: normal;
   overflow: hidden;
 }
+
 .milieu-page,
 .droite-page {
   &::-webkit-scrollbar {
@@ -275,7 +276,7 @@ li {
         .bottom-post {
           display: flex;
           flex-direction: column;
-          align-items: center;
+          align-items: flex-start;
           justify-content: center;
           gap: 20px;
           .message {

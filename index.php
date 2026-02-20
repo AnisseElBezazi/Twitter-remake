@@ -2,32 +2,7 @@
 require_once('./includes/security.php');
 require_once('./includes/functions.php');
 require_once './config/database.php';
-
-$query = $pdo->query("SELECT * FROM movies ORDER BY created_at DESC");
-$movies = $query->fetchAll(PDO::FETCH_ASSOC);
-$movieId = isset($_GET['movie_id']) ? (int)$_GET['movie_id'] : null;
-
-if ($movieId) {
-    $stmt = $pdo->prepare("
-        SELECT p.*, u.pseudo, u.avatar, m.title as movie_name 
-        FROM posts p
-        JOIN users u ON p.user_id = u.id
-        JOIN movies m ON p.movie_id = m.id
-        WHERE p.movie_id = ?
-        ORDER BY p.created_at DESC
-    ");
-    $stmt->execute([$movieId]);
-} else {
-    
-    $stmt = $pdo->query("
-        SELECT p.*, u.pseudo, u.avatar, m.title as movie_name 
-        FROM posts p
-        JOIN users u ON p.user_id = u.id
-        JOIN movies m ON p.movie_id = m.id
-        ORDER BY p.created_at DESC
-    ");
-}
-$posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+require_once './process/data_fetch.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,31 +79,21 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
       <div class="compte-deconnexion">
         <div class="pp">
-          <img src="assets/img/profil-picture.jpg" alt="Profil-picture" />
+          <img src="assets/upload/avatars/profil-picture.jpg" alt="Profil-picture" />
         </div>
         <div class="pseudo">
           <p class="name">Anisse E.</p>
           <p class="real-name">@anisseel</p>
         </div>
-        <button class="deconnexion">
-          <svg
-            class="icone-logout"
-            width="17"
-            height="21"
-            viewBox="0 0 17 21"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M8.59317 20.2584L8.58217 20.2604L8.51117 20.2954L8.49117 20.2994L8.47717 20.2954L8.40617 20.2604C8.39551 20.2571 8.3875 20.2588 8.38217 20.2654L8.37817 20.2754L8.36117 20.7034L8.36617 20.7234L8.37617 20.7364L8.48017 20.8104L8.49517 20.8144L8.50717 20.8104L8.61117 20.7364L8.62317 20.7204L8.62717 20.7034L8.61017 20.2764C8.6075 20.2658 8.60184 20.2598 8.59317 20.2584ZM8.85817 20.1454L8.84517 20.1474L8.66017 20.2404L8.65017 20.2504L8.64717 20.2614L8.66517 20.6914L8.67017 20.7034L8.67817 20.7104L8.87917 20.8034C8.89184 20.8068 8.9015 20.8041 8.90817 20.7954L8.91217 20.7814L8.87817 20.1674C8.87484 20.1554 8.86817 20.1481 8.85817 20.1454ZM8.14317 20.1474C8.13876 20.1448 8.1335 20.1439 8.12847 20.145C8.12344 20.1461 8.11903 20.1491 8.11617 20.1534L8.11017 20.1674L8.07617 20.7814C8.07684 20.7934 8.08251 20.8014 8.09317 20.8054L8.10817 20.8034L8.30917 20.7104L8.31917 20.7024L8.32317 20.6914L8.34017 20.2614L8.33717 20.2494L8.32717 20.2394L8.14317 20.1474Z"
-              fill="white"
-            />
-            <path
-              d="M8 0C8.25488 0.000282707 8.50003 0.0978791 8.68537 0.272848C8.8707 0.447818 8.98224 0.686953 8.99717 0.941395C9.01211 1.19584 8.92933 1.44638 8.76574 1.64183C8.60215 1.83729 8.3701 1.9629 8.117 1.993L8 2H3C2.75507 2.00003 2.51866 2.08996 2.33563 2.25272C2.15259 2.41547 2.03566 2.63975 2.007 2.883L2 3V15C2.00003 15.2449 2.08996 15.4813 2.25272 15.6644C2.41547 15.8474 2.63975 15.9643 2.883 15.993L3 16H7.5C7.75488 16.0003 8.00003 16.0979 8.18537 16.2728C8.3707 16.4478 8.48224 16.687 8.49717 16.9414C8.51211 17.1958 8.42933 17.4464 8.26574 17.6418C8.10215 17.8373 7.8701 17.9629 7.617 17.993L7.5 18H3C2.23479 18 1.49849 17.7077 0.941739 17.1827C0.384993 16.6578 0.0498925 15.9399 0.00500012 15.176L4.66045e-09 15V3C-4.26217e-05 2.23479 0.292325 1.49849 0.817284 0.941739C1.34224 0.384993 2.06011 0.0498925 2.824 0.00500011L3 0H8ZM13.707 5.464L16.535 8.293C16.7225 8.48053 16.8278 8.73484 16.8278 9C16.8278 9.26516 16.7225 9.51947 16.535 9.707L13.707 12.536C13.5194 12.7235 13.2649 12.8288 12.9996 12.8287C12.7344 12.8286 12.48 12.7231 12.2925 12.5355C12.105 12.3479 11.9997 12.0934 11.9998 11.8281C11.9999 11.5629 12.1054 11.3085 12.293 11.121L13.414 10H8C7.73478 10 7.48043 9.89464 7.29289 9.70711C7.10536 9.51957 7 9.26522 7 9C7 8.73478 7.10536 8.48043 7.29289 8.29289C7.48043 8.10536 7.73478 8 8 8H13.414L12.293 6.879C12.1054 6.69149 11.9999 6.43712 11.9998 6.17185C11.9997 5.90658 12.105 5.65214 12.2925 5.4645C12.48 5.27686 12.7344 5.17139 12.9996 5.1713C13.2649 5.1712 13.5194 5.27649 13.707 5.464Z"
-              fill="white"
-            />
-          </svg>
-        </button>
+       <form action="./process/logout.php" method="POST" style="display: flex; align-items: center; margin: 0;">
+  <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
+  <button type="submit" class="deconnexion" style="background: none; border: none; padding: 0; cursor: pointer;">
+    <svg class="icone-logout" width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8.59317 20.2584L8.58217 20.2604L8.51117 20.2954L8.49117 20.2994L8.47717 20.2954L8.40617 20.2604C8.39551 20.2571 8.3875 20.2588 8.38217 20.2654L8.37817 20.2754L8.36117 20.7034L8.36617 20.7234L8.37617 20.7364L8.48017 20.8104L8.49517 20.8144L8.50717 20.8104L8.61117 20.7364L8.62317 20.7204L8.62717 20.7034L8.61017 20.2764C8.6075 20.2658 8.60184 20.2598 8.59317 20.2584ZM8.85817 20.1454L8.84517 20.1474L8.66017 20.2404L8.65017 20.2504L8.64717 20.2614L8.66517 20.6914L8.67017 20.7034L8.67817 20.7104L8.87917 20.8034C8.89184 20.8068 8.9015 20.8041 8.90817 20.7954L8.91217 20.7814L8.87817 20.1674C8.87484 20.1554 8.86817 20.1481 8.85817 20.1454ZM8.14317 20.1474C8.13876 20.1448 8.1335 20.1439 8.12847 20.145C8.12344 20.1461 8.11903 20.1491 8.11617 20.1534L8.11017 20.1674L8.07617 20.7814C8.07684 20.7934 8.08251 20.8014 8.09317 20.8054L8.10817 20.8034L8.30917 20.7104L8.31917 20.7024L8.32317 20.6914L8.34017 20.2614L8.33717 20.2494L8.32717 20.2394L8.14317 20.1474Z" fill="white" />
+      <path d="M8 0C8.25488 0.000282707 8.50003 0.0978791 8.68537 0.272848C8.8707 0.447818 8.98224 0.686953 8.99717 0.941395C9.01211 1.19584 8.92933 1.44638 8.76574 1.64183C8.60215 1.83729 8.3701 1.9629 8.117 1.993L8 2H3C2.75507 2.00003 2.51866 2.08996 2.33563 2.25272C2.15259 2.41547 2.03566 2.63975 2.007 2.883L2 3V15C2.00003 15.2449 2.08996 15.4813 2.25272 15.6644C2.41547 15.8474 2.63975 15.9643 2.883 15.993L3 16H7.5C7.75488 16.0003 8.00003 16.0979 8.18537 16.2728C8.3707 16.4478 8.48224 16.687 8.49717 16.9414C8.51211 17.1958 8.42933 17.4464 8.26574 17.6418C8.10215 17.8373 7.8701 17.9629 7.617 17.993L7.5 18H3C2.23479 18 1.49849 17.7077 0.941739 17.1827C0.384993 16.6578 0.0498925 15.9399 0.00500012 15.176L4.66045e-09 15V3C-4.26217e-05 2.23479 0.292325 1.49849 0.817284 0.941739C1.34224 0.384993 2.06011 0.0498925 2.824 0.00500011L3 0H8ZM13.707 5.464L16.535 8.293C16.7225 8.48053 16.8278 8.73484 16.8278 9C16.8278 9.26516 16.7225 9.51947 16.535 9.707L13.707 12.536C13.5194 12.7235 13.2649 12.8288 12.9996 12.8287C12.7344 12.8286 12.48 12.7231 12.2925 12.5355C12.105 12.3479 11.9997 12.0934 11.9998 11.8281C11.9999 11.5629 12.1054 11.3085 12.293 11.121L13.414 10H8C7.73478 10 7.48043 9.89464 7.29289 9.70711C7.10536 9.51957 7 9.26522 7 9C7 8.73478 7.10536 8.48043 7.29289 8.29289C7.48043 8.10536 7.73478 8 8 8H13.414L12.293 6.879C12.1054 6.69149 11.9999 6.43712 11.9998 6.17185C11.9997 5.90658 12.105 5.65214 12.2925 5.4645C12.48 5.27686 12.7344 5.17139 12.9996 5.1713C13.2649 5.1712 13.5194 5.27649 13.707 5.464Z" fill="white" />
+    </svg>
+  </button>
+</form>
       </div>
     </nav>
 
@@ -147,22 +112,27 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <a href="index.php" style="color: var(--primary); font-size: 0.8rem;">Retour au flux global</a>
         <?php endif; ?>
     </div>
-      <form class="post-form" action="post">
+      <form class="post-form" action="./process/post_process.php" method="POST">
+        <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
+        
+        <?php if ($movieId): ?>
+            <input type="hidden" name="movie_id" value="<?= htmlspecialchars($movieId) ?>">
+        <?php endif; ?>
+
         <div class="top-form">
           <div class="pp">
-            <img src="assets/img/profil-picture.jpg" alt="Profil-picture" />
+            <img src="assets/upload/avatars/<?php echo $_SESSION['avatar'] ?? 'profil-picture.jpg'; ?>" alt="Profil-picture" />
           </div>
 
           <textarea
             class="input-post"
-            id="input-post"
-            name="input-post"
+            name="content"
             placeholder="Quoi de neuf ?"
             required
           ></textarea>
         </div>
         <div class="bottom-form">
-          <button class="primary-button">Poster</button>
+          <button type="submit" class="primary-button">Poster</button>
         </div>
       </form>
 
@@ -174,14 +144,14 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="post">
                 <div class="left-post">
                     <div class="pp">
-                        <img src="assets/img/<?= htmlspecialchars($post['avatar']) ?>" alt="avatar">
+                        <img src="assets/upload/avatars/<?= htmlspecialchars($post['avatar']) ?>" alt="avatar">
                     </div>
                 </div>
                 <div class="right-post">
                     <div class="pseudo">
                         <p class="name"><?= htmlspecialchars($post['pseudo']) ?></p>
                         <p class="real-name">@<?= htmlspecialchars($post['pseudo']) ?></p>
-                        <p class="time">. Salon : <?= htmlspecialchars($post['movie_name']) ?></p>
+                        <p class="time">. Salon : <?= htmlspecialchars($post['movie_name'] ?? 'Général') ?></p>
                     </div>
                     <div class="bottom-post">
                         <p class="message">
@@ -228,23 +198,23 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
     <div class="list-film">
-        <h3 class="title">Salons Populaires</h3>
+    <h3 class="title">Salons Populaires</h3>
 
-        <?php if (!empty($movies)): ?>
-            <?php foreach ($movies as $movie): ?>
-    <a href="index.php?movie_id=<?= $movie['id'] ?>" style="text-decoration: none; color: inherit;">
-        <div class="card">
-            <h4 class="title"><?= htmlspecialchars($movie['title']) ?></h4>
-            <div class="affiche">
-                <img src="assets/img/<?= htmlspecialchars($movie['poster_path']) ?>" alt="<?= htmlspecialchars($movie['title']) ?>" />
-            </div>
-        </div>
-    </a>
-<?php endforeach; ?>
-        <?php else: ?>
-            <p style="color: #71767b; padding: 20px;">Aucun salon disponible pour le moment.</p>
-        <?php endif; ?>
-    </div>
+    <?php if (!empty($movies)): ?>
+        <?php foreach ($movies as $movie): ?>
+            <a href="index.php?movie_id=<?= $movie['id'] ?>" class="card-link" style="text-decoration: none; color: inherit;">
+                <div class="card">
+                    <h4 class="title"><?= htmlspecialchars($movie['title']) ?></h4>
+                    <div class="affiche">
+                        <img src="assets/img/<?= htmlspecialchars($movie['poster_path']) ?>" alt="<?= htmlspecialchars($movie['title']) ?>" />
+                    </div>
+                </div>
+            </a>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p style="color: #71767b; padding: 20px;">Aucun salon disponible pour le moment.</p>
+    <?php endif; ?>
+</div>
 </section>
 </body>
 

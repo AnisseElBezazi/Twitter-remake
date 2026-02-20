@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.3
+-- version 5.2.2
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : jeu. 19 fév. 2026 à 11:07
+-- Généré le : ven. 20 fév. 2026 à 15:13
 -- Version du serveur : 8.4.3
 -- Version de PHP : 8.3.16
 
@@ -50,16 +50,56 @@ CREATE TABLE `likes` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `movies`
+--
+
+CREATE TABLE `movies` (
+  `id` int NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `poster_path` varchar(255) DEFAULT NULL,
+  `description` text,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `movies`
+--
+
+INSERT INTO `movies` (`id`, `title`, `poster_path`, `description`, `created_at`) VALUES
+(1, 'Arcane', 'Arcane-affiche.webp', NULL, '2026-02-19 20:03:27'),
+(2, 'Naruto', 'naruto-affiche.jpg', NULL, '2026-02-19 20:03:27'),
+(3, 'Memento', 'memento-affiche.jpg', NULL, '2026-02-19 20:03:27'),
+(4, 'One Piece', 'onepiece-affiche.jpg', NULL, '2026-02-19 20:03:27'),
+(5, 'Hunger Games', 'Hunger-games-affiche.jpg', NULL, '2026-02-19 20:09:57'),
+(6, 'Labyrinthe', 'labyrinthe-affiche.webp', '', '2026-02-19 20:09:57'),
+(7, 'Le Prestige', 'Le-Prestige-affiche.jpg', '', '2026-02-19 20:09:57'),
+(8, 'Avatar 3', 'Avatar-affiche.jpg', '', '2026-02-19 20:09:57'),
+(9, 'Interstelar', 'interstelar-affiche.jpg', '', '2026-02-19 20:09:57');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `posts`
 --
 
 CREATE TABLE `posts` (
   `id` int NOT NULL,
   `user_id` int NOT NULL,
+  `movie_id` int DEFAULT NULL,
   `content` varchar(280) NOT NULL,
   `image_path` varchar(255) DEFAULT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `posts`
+--
+
+INSERT INTO `posts` (`id`, `user_id`, `movie_id`, `content`, `image_path`, `created_at`) VALUES
+(1, 1, 1, 'Franchement la saison 2 d\'Arcane est une masterclass visuelle !', NULL, '2026-02-19 20:58:32'),
+(2, 3, 2, 'Est-ce que quelqu\'un sait quand sortent les prochains chapitres ?', NULL, '2026-02-19 20:58:32'),
+(3, 3, 3, 'Je viens de revoir Memento, je n\'ai toujours rien compris à la fin...', 'img-test.png', '2026-02-19 20:58:32'),
+(4, 4, NULL, 'Salam les rhey', NULL, '2026-02-20 15:46:57');
 
 -- --------------------------------------------------------
 
@@ -69,28 +109,26 @@ CREATE TABLE `posts` (
 
 CREATE TABLE `users` (
   `id` int NOT NULL,
+  `real_name` varchar(255) NOT NULL,
   `pseudo` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` enum('admin','user') NOT NULL DEFAULT 'user',
-  `avatar` varchar(255) DEFAULT 'default.png',
+  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'profil-picture.jpg',
   `bio` text,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `banner` varchar(255) NOT NULL DEFAULT 'banner_default.png'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`id`, `pseudo`, `email`, `password`, `role`, `avatar`, `bio`, `created_at`) VALUES
-(1, 'AdminQuentin', 'admin@twitter.com', '$2y$10$wW55.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2', 'admin', 'default.png', 'Je suis le boss du site.', '2026-02-18 09:15:05'),
-(2, 'JeanVisiteur', 'jean@test.com', '$2y$10$wW55.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2', 'user', 'default.png', 'Jadore scroller toute la journée.', '2026-02-18 09:15:05'),
-(3, 'slowix', 'qdeglas@gmail.com', '$2y$10$daSZ/ur3TXCDwV7fnPiw3eTBw5fkHInJpI/DXLHhI.awsuYbMVH1G', 'user', 'default.png', NULL, '2026-02-18 10:25:18'),
-(4, 'slowixx', 'qudeglas@gmail.com', '$2y$10$ewvYCEFUeBpiXwdzb4wUBe43MMlWYnV9ghF48x1GakG622QdGgWc2', 'user', 'default.png', NULL, '2026-02-18 10:27:13'),
-(5, 'slowixxxxx', 'qdeglass@gmail.com', '$2y$10$u5.La/CNJTFrjIGfXay4fe7mZtc8Inc.ajh4WrgnQXye7UyGlnY0W', 'user', 'default.png', NULL, '2026-02-18 11:37:20'),
-(6, 'maxym', 'maxym@gmail.com', '$2y$10$I6bTMysg.Fxc1IZwBcz6qOUm5wHu4khp2sWwIzxFbggZian4SytPa', 'user', 'default.png', NULL, '2026-02-18 11:39:53'),
-(7, 'quentin', 'qusdeglas@gmail.com', '$2y$10$NcReID9gbf54u3jBNmdY.u955bHWjs9YhVLns1eDDQ4rib5PnHz62', 'user', 'default.png', NULL, '2026-02-19 11:17:13'),
-(8, 'aniz', 'aniz@gmail.com', '$2y$10$AXchglKEWUIOdLlp3Bi8TuoS9AuiTLMZetJTjfd3cku9pZXJRpRJO', 'user', 'default.png', NULL, '2026-02-19 12:02:37');
+INSERT INTO `users` (`id`, `real_name`, `pseudo`, `email`, `password`, `role`, `avatar`, `bio`, `created_at`, `banner`) VALUES
+(1, 'Anisse', 'anisseel', 'anisse.elbezazi@gmail.com', '$2y$10$u3oE5iIKfb5sWz2G1s3vv.E0hfUpYejwcmpxhRD/bW1HmZVSVIKyC', 'user', 'profil-picture.jpg', NULL, '2026-02-19 20:28:37', 'banner_default.png'),
+(2, 'Jinx', 'Jinx', 'jinx@zaun.com', 'password_hash', 'user', 'profil-picture.jpg', NULL, '2026-02-19 20:58:32', 'banner_default.png'),
+(3, '', 'sertyujkujhgfbdvcs', 'quefjkrgbhfkv@gmail.com', '$2y$10$nklVBlRbyPL2FThNAzvyT.WYCQXrE/tW9pr/krssU9UL/tHnmln/O', 'user', 'profil-picture.jpg', NULL, '2026-02-20 09:03:27', 'banner_default.png'),
+(4, 'Booba', 'B2O', 'Booba@gmail.com', '$2y$10$anb/r7ebhaIGbE0AYIpeIu1mo2afak6XSIWT3bThumws.AlWtJ1oa', 'user', 'profil-picture.jpg', NULL, '2026-02-20 15:44:35', 'banner_default.png');
 
 --
 -- Index pour les tables déchargées
@@ -101,22 +139,29 @@ INSERT INTO `users` (`id`, `pseudo`, `email`, `password`, `role`, `avatar`, `bio
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `post_id` (`post_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `fk_comment_post` (`post_id`),
+  ADD KEY `fk_comment_user` (`user_id`);
 
 --
 -- Index pour la table `likes`
 --
 ALTER TABLE `likes`
   ADD PRIMARY KEY (`user_id`,`post_id`),
-  ADD KEY `post_id` (`post_id`);
+  ADD KEY `fk_like_post` (`post_id`);
+
+--
+-- Index pour la table `movies`
+--
+ALTER TABLE `movies`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `fk_post_user` (`user_id`),
+  ADD KEY `fk_post_movie` (`movie_id`);
 
 --
 -- Index pour la table `users`
@@ -137,16 +182,22 @@ ALTER TABLE `comments`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `movies`
+--
+ALTER TABLE `movies`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT pour la table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Contraintes pour les tables déchargées
@@ -156,21 +207,22 @@ ALTER TABLE `users`
 -- Contraintes pour la table `comments`
 --
 ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_comment_post` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_comment_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `likes`
 --
 ALTER TABLE `likes`
-  ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_like_post` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_like_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `posts`
 --
 ALTER TABLE `posts`
-  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_post_movie` FOREIGN KEY (`movie_id`) REFERENCES `movies` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_post_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -11,12 +11,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    $name = trim ($_POST['name'] ??'');
     $pseudo = trim($_POST['pseudo'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
 
     $errors = [];
+
+    if (empty($name)) {
+        $errors[] = "Les noms et prénoms sont obligatoires";
+    }
 
     if (empty($pseudo)) {
         $errors[] = 'Le pseudo est requis';
@@ -26,11 +31,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($email)) {
         $errors[] = "L'email est requis";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Merci de rentrer un e-mail valide";
     }
 
-    if (empty($password)) {
-        $errors[] = "Le mot de passe est requis";
+if (empty($password)) {
+    $errors[] = "Le mot de passe est requis.";
+} else {
+    if (strlen($password) < 8) {
+        $errors[] = "Le mot de passe doit faire au moins 8 caractères.";
+    } elseif (!preg_match('/[A-Z]/', $password)) {
+        $errors[] = "Il faut au moins une lettre majuscule.";
+    } elseif (!preg_match('/[#?!@$%^&*-]/', $password)) {
+        $errors[] = "Il faut au moins un caractère spécial.";
     }
+}
 
 
     if (!empty($errors)) {
@@ -54,11 +69,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $passwordhash = password_hash($password, PASSWORD_DEFAULT);
 
-        $insertStmt = $pdo->prepare("INSERT INTO users (pseudo, email, password) VALUES (:pseudo, :email, :password)");
+        $insertStmt = $pdo->prepare("INSERT INTO users (pseudo, email, password, real_name) VALUES (:pseudo, :email, :password, :real_name)");
         $insertStmt->execute([
             ':pseudo' => $pseudo,
             ':email' => $email,
-            ':password' => $passwordhash
+            ':password' => $passwordhash,
+            ':real_name' => $name
         ]);
 
         $_SESSION['success'] = 'Inscription réussie';

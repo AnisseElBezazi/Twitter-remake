@@ -23,6 +23,7 @@ require_once __DIR__ . '/includes/functions.php';
     <form class="formulaire" action="./process/register_process.php" method="post">
         <h1 class="title">S'inscrire</h1>
 
+        <input  class="input-formulaire" type="text" name="name" id="name" placeholder="Nom"  required>
         <input class="input-formulaire" type="text" name="pseudo" id="pseudo" placeholder="Pseudo" required>
         <input class="input-formulaire" type="email" name="email" id="email" placeholder="Entrez votre email" required>
         <input class="input-formulaire" type="password" name="password" id="password" placeholder="Entrez votre mot de passe" required>

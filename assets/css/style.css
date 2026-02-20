@@ -132,6 +132,9 @@ li {
   overflow-y: auto;
 }
 .milieu-page .top {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
   position: sticky;
   top: 0;
   z-index: 10;

@@ -5,7 +5,7 @@ $movieId = isset($_GET['movie_id']) ? (int)$_GET['movie_id'] : null;
 
 if ($movieId) {
     $stmt = $pdo->prepare("
-        SELECT p.*, u.pseudo, u.avatar, m.title as movie_name 
+        SELECT p.*, u.pseudo, u.real_name, u.avatar, m.title as movie_name 
         FROM posts p
         JOIN users u ON p.user_id = u.id
         LEFT JOIN movies m ON p.movie_id = m.id
@@ -16,7 +16,7 @@ if ($movieId) {
 } else {
     
     $stmt = $pdo->query("
-        SELECT p.*, u.pseudo, u.avatar, m.title as movie_name 
+        SELECT p.*, u.pseudo, u.real_name, u.avatar, m.title as movie_name 
         FROM posts p
         JOIN users u ON p.user_id = u.id
         LEFT JOIN movies m ON p.movie_id = m.id
@@ -24,5 +24,23 @@ if ($movieId) {
     ");
 }
 $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+
+
+$currentMovieTitle = "Général";
+
+if ($movieId) {
+    $stmt_title = $pdo->prepare("SELECT title FROM movies WHERE id = ?");
+    $stmt_title->execute([$movieId]);
+    $current_movie = $stmt_title->fetch(PDO::FETCH_ASSOC);
+    
+    if ($current_movie) {
+        $currentMovieTitle = "Salon : " . $current_movie['title'];
+    } else {
+        $currentMovieTitle = "Salon introuvable";
+    }
+}
 
 ?>

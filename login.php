@@ -16,16 +16,7 @@ require_once __DIR__ . '/includes/functions.php';
 <body class="connexion-body">
 
 
-    <?php
-    if (isset($_SESSION['error'])) {
-        echo '<div style="color: red; margin-bottom: 10px;">' . $_SESSION['error'] . '</div>';
-        unset($_SESSION['error']);
-    }
-    if (isset($_SESSION['success'])) {
-        echo '<div style="color: green; margin-bottom: 10px;">' . $_SESSION['success'] . '</div>';
-        unset($_SESSION['success']);
-    }
-    ?>
+ 
     <div class="container-form">
     <div class="logo">FlixThread</div>
 
@@ -36,6 +27,16 @@ require_once __DIR__ . '/includes/functions.php';
         <input class="input-formulaire" type="password" name="password" id="password" placeholder="Entrez votre mot de passe" required>
         <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
         <button class="primary-button" type="submit">Se connecter</button>
+           <?php
+    if (isset($_SESSION['error'])) {
+        echo '<div style="color: red; margin-bottom: 10px;">' . $_SESSION['error'] . '</div>';
+        unset($_SESSION['error']);
+    }
+    if (isset($_SESSION['success'])) {
+        echo '<div style="color: green; margin-bottom: 10px;">' . $_SESSION['success'] . '</div>';
+        unset($_SESSION['success']);
+    }
+    ?>
         <div class="signup-link">
             <p>Nouveau sur FlixThread ?</p>
             <a href="register.php">Inscrivez-vous maintenant.</a>

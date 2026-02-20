@@ -15,16 +15,7 @@ require_once __DIR__ . '/includes/functions.php';
 
 <body class="connexion-body">
 
-    <?php
-    if (isset($_SESSION['error'])) {
-        echo '<div style="color: red; margin-bottom: 10px;">' . $_SESSION['error'] . '</div>';
-        unset($_SESSION['error']);
-    }
-    if (isset($_SESSION['success'])) {
-        echo '<div style="color: green; margin-bottom: 10px;">' . $_SESSION['success'] . '</div>';
-        unset($_SESSION['success']);
-    }
-    ?>
+    
 
 <div class="container-form">
     <div class="logo">FlixThread</div>
@@ -39,6 +30,16 @@ require_once __DIR__ . '/includes/functions.php';
         <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
         
         <button class="primary-button" type="submit">S'inscrire</button>
+        <?php
+    if (isset($_SESSION['error'])) {
+        echo '<div style="color: red; margin-bottom: 10px;">' . $_SESSION['error'] . '</div>';
+        unset($_SESSION['error']);
+    }
+    if (isset($_SESSION['success'])) {
+        echo '<div style="color: green; margin-bottom: 10px;">' . $_SESSION['success'] . '</div>';
+        unset($_SESSION['success']);
+    }
+    ?>
 
         <div class="signup-link">
             <p>Déjà un compte ?</p>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : ven. 20 fév. 2026 à 18:37
+-- Généré le : ven. 20 fév. 2026 à 21:14
 -- Version du serveur : 8.4.3
 -- Version de PHP : 8.3.16
 
@@ -101,7 +101,16 @@ INSERT INTO `posts` (`id`, `user_id`, `movie_id`, `content`, `image_path`, `crea
 (3, 3, 3, 'Je viens de revoir Memento, je n\'ai toujours rien compris à la fin...', 'img-test.png', '2026-02-19 20:58:32'),
 (4, 4, NULL, 'Salam les rhey', NULL, '2026-02-20 15:46:57'),
 (5, 1, NULL, 'Test', NULL, '2026-02-20 18:46:35'),
-(6, 1, NULL, 'dssqdsq', NULL, '2026-02-20 19:03:20');
+(6, 1, NULL, 'dssqdsq', NULL, '2026-02-20 19:03:20'),
+(7, 4, 1, 'Jinx est complètement fêlée, elle tire sur tout ce qui bouge. A Nanterre elle ne tiendrait même pas deux heures. Vi et sa coupe de cheveux éclatée, aucune prestance. Le Duc ne valide pas.', NULL, '2026-02-20 21:35:47'),
+(8, 4, 2, 'Un renard dans le ventre et ça fait le caïd. Naruto a passé 15 ans à courir après Sasuke le fuyard. Dans le 92 on ne court pas après les traîtres, on les éteint. Rasengan sur vos carrières. La piraterie n\'est jamais finie.', NULL, '2026-02-20 21:35:47'),
+(9, 4, 3, 'Le mec a plus de mémoire il se tatoue des post-it sur le torse. Achète un iPhone frérot. Oublier ses ennemis c\'est une faute grave. Moi je n\'oublie rien, la vengeance est un plat qui se mange glacé.', NULL, '2026-02-20 21:35:47'),
+(10, 4, 4, 'Luffy a les bras élastiques, il s\'étire comme mes royalties. Mais ça fait 25 ans qu\'ils cherchent un trésor imaginaire en sandales. La vraie piraterie c\'est nous, pas ces baltringues en chapeau de paille.', NULL, '2026-02-20 21:35:47'),
+(11, 4, 5, 'Katniss joue à Robin des Bois avec un arc en plastique pendant que le Capitole mange du caviar. Ils se battent pour survivre dans une forêt artificielle, nous on a survécu à la street du 92. Différence de niveau.', NULL, '2026-02-20 21:35:47'),
+(12, 4, 6, 'Courir dans un labyrinthe poursuivi par des robots-araignées. Achetez un GPS les gars. Thomas fait le héros mais il a zéro cardio. C\'est sombre d\'être aussi perdu dans la vie.', NULL, '2026-02-20 21:35:47'),
+(13, 4, 7, 'Deux magiciens qui font des tours de passe-passe pour impressionner la galerie. La seule vraie magie c\'est de faire disparaître mes concurrents du top streaming.', NULL, '2026-02-20 21:35:47'),
+(14, 4, 8, 'Encore les Schtroumpfs bleus géants. Cette fois ils sont dans l\'eau. James Cameron a cru on avait 4 heures à perdre à regarder des poissons extraterrestres. Retournez dans votre arbre.', NULL, '2026-02-20 21:35:47'),
+(15, 4, 9, 'Cooper va dans l\'espace, il pleure devant des vidéos, il rentre sa fille a 100 ans. Grosse erreur de timing. Le temps c\'est de l\'argent, j\'ai pas le time pour les trous noirs.', NULL, '2026-02-20 21:35:47');
 
 -- --------------------------------------------------------
 
@@ -130,7 +139,7 @@ INSERT INTO `users` (`id`, `real_name`, `pseudo`, `email`, `password`, `role`, `
 (1, 'Anisse', 'anisseel', 'anisse.elbezazi@gmail.com', '$2y$10$u3oE5iIKfb5sWz2G1s3vv.E0hfUpYejwcmpxhRD/bW1HmZVSVIKyC', 'user', 'profil-picture.jpg', NULL, '2026-02-19 20:28:37', 'banner_default.jpg'),
 (2, 'Jinx', 'Jinx', 'jinx@zaun.com', 'password_hash', 'user', 'profil-picture.jpg', NULL, '2026-02-19 20:58:32', 'banner_default.jpg'),
 (3, '', 'sertyujkujhgfbdvcs', 'quefjkrgbhfkv@gmail.com', '$2y$10$nklVBlRbyPL2FThNAzvyT.WYCQXrE/tW9pr/krssU9UL/tHnmln/O', 'user', 'profil-picture.jpg', NULL, '2026-02-20 09:03:27', 'banner_default.jpg'),
-(4, 'Booba', 'B2O', 'Booba@gmail.com', '$2y$10$anb/r7ebhaIGbE0AYIpeIu1mo2afak6XSIWT3bThumws.AlWtJ1oa', 'user', 'Booba.jpg', NULL, '2026-02-20 15:44:35', 'banner_default.jpg');
+(4, 'Booba', 'B2O', 'Booba@gmail.com', '$2y$10$anb/r7ebhaIGbE0AYIpeIu1mo2afak6XSIWT3bThumws.AlWtJ1oa', 'user', 'B2O_avatar.jpg', 'fait belek  à B2O', '2026-02-20 15:44:35', 'B2O_banner.jpg');
 
 --
 -- Index pour les tables déchargées
@@ -193,7 +202,7 @@ ALTER TABLE `movies`
 -- AUTO_INCREMENT pour la table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT pour la table `users`

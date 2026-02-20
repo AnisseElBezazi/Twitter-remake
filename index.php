@@ -1,12 +1,13 @@
-<?php
+<?php 
 require_once('./includes/security.php');
 require_once('./includes/functions.php');
-require_once './config/database.php';
-require_once './process/data_fetch.php';
-
+require_once('./config/database.php');
+require_once('./process/data_fetch.php');
+require_once('./process/profil_fetch.php');
+require_once('./process/formatage_affichage.php');
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -49,6 +50,12 @@ require './includes/header.php';
           ></textarea>
         </div>
         <div class="bottom-form">
+          <div class="upload-button">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                            <circle cx="12" cy="13" r="4"></circle>
+                        </svg>
+                        </div>
           <button type="submit" class="primary-button">Poster</button>
         </div>
       </form>

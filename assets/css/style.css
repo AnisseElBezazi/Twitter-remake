@@ -183,7 +183,8 @@ li {
   width: 100%;
   position: relative;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   padding: 15px;
 }
 .milieu-page .post-form .bottom-form::before {
@@ -194,6 +195,20 @@ li {
   right: 0;
   height: 1px;
   background-color: #3b4044;
+}
+.milieu-page .post-form .bottom-form .upload-button {
+  margin-left: 75px;
+  background: none;
+  border-radius: 9999px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.milieu-page .post-form .bottom-form .upload-button:hover {
+  background: #141515;
 }
 .milieu-page .post-form .bottom-form .primary-button {
   display: flex;
@@ -524,7 +539,7 @@ li {
 .milieu-page .hero-profil .avatar-container .avatar {
   width: 130px;
   height: 130px;
-  border-radius: 50%;
+  border-radius: 9999px;
   border: 4px solid #000000;
   object-fit: cover;
 }
@@ -533,7 +548,7 @@ li {
   justify-content: flex-end;
   padding: 15px 20px;
 }
-.milieu-page .actions-profil .edit-btn {
+.milieu-page .actions-profil .edit-button {
   background: transparent;
   color: #ffffff;
   border: 1px solid #3b4044;
@@ -544,7 +559,7 @@ li {
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
-.milieu-page .actions-profil .edit-btn:hover {
+.milieu-page .actions-profil .edit-button:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 .milieu-page .details-profil {
@@ -607,6 +622,186 @@ li {
   height: 4px;
   background-color: #e50914;
   border-radius: 999px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+.modal .modal-content {
+  background: #000000;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+.modal .modal-content::-webkit-scrollbar {
+  display: none;
+}
+.modal .modal-content .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  position: sticky;
+  top: 0;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(5px);
+  z-index: 20;
+}
+.modal .modal-content .modal-header .left-header-modal {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.modal .modal-content .modal-header .left-header-modal .close-button {
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 999px;
+  transition: background-color 0.2s;
+}
+.modal .modal-content .modal-header .left-header-modal .close-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.modal .modal-content .modal-header .left-header-modal h2 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+.modal .modal-content .modal-header .save-button {
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.modal .modal-content .modal-header .save-button:hover {
+  background-color: #e6e6e6;
+}
+.modal .modal-content #edit-profil-form {
+  display: flex;
+  flex-direction: column;
+}
+.modal .modal-content #edit-profil-form .hero-edit {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background-color: #3b4044;
+}
+.modal .modal-content #edit-profil-form .hero-edit .banner-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.modal .modal-content #edit-profil-form .hero-edit .overlay-actions {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+}
+.modal .modal-content #edit-profil-form .avatar-edit-container {
+  position: relative;
+  padding-left: 20px;
+  margin-top: -60px;
+  margin-bottom: 20px;
+}
+.modal .modal-content #edit-profil-form .avatar-edit-container .avatar-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 9999px;
+  border: 4px solid #000000;
+  background-color: #3b4044;
+}
+.modal .modal-content #edit-profil-form .avatar-edit-container .avatar-wrapper .avatar-preview {
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  object-fit: cover;
+}
+.modal .modal-content #edit-profil-form .avatar-edit-container .avatar-wrapper .icon-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.modal .modal-content #edit-profil-form .icon-button {
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 9999px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.modal .modal-content #edit-profil-form .icon-button:hover {
+  background: #141515;
+}
+.modal .modal-content #edit-profil-form .form-body {
+  padding: 0 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.modal .modal-content #edit-profil-form .form-body .input-edit {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #3b4044;
+  border-radius: 4px;
+  position: relative;
+  transition: border-color 0.2s;
+}
+.modal .modal-content #edit-profil-form .form-body .input-edit:focus-within {
+  border-color: #e50914;
+}
+.modal .modal-content #edit-profil-form .form-body .input-edit:focus-within label {
+  color: #e50914;
+}
+.modal .modal-content #edit-profil-form .form-body .input-edit label {
+  font-size: 0.8rem;
+  color: #71767b;
+  padding: 8px 10px 0 10px;
+  transition: color 0.2s;
+}
+.modal .modal-content #edit-profil-form .form-body .input-edit input,
+.modal .modal-content #edit-profil-form .form-body .input-edit textarea {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  padding: 5px 10px 10px 10px;
+  font-size: 1rem;
+  outline: none;
+  font-family: inherit;
+}
+.modal .modal-content #edit-profil-form .form-body .input-edit textarea {
+  resize: none;
 }
 
 /*# sourceMappingURL=style.css.map */

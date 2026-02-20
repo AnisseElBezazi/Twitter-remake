@@ -4,8 +4,11 @@ require_once('./includes/functions.php');
 require_once './config/database.php';
 require_once './process/data_fetch.php';
 require_once './process/profil_fetch.php';
-
+require_once './process/formatage_affichage.php';
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -39,7 +42,7 @@ require_once './process/profil_fetch.php';
         </div>
 
         <div class="actions-profil">
-            <button class="edit-btn">Éditer profil</button>
+            <button class="edit-button" onclick="openEditModal()">Éditer profil</button>
         </div>
 
         <div class="details-profil">
@@ -98,7 +101,7 @@ require_once './process/profil_fetch.php';
             </div>
         <?php endforeach; ?>
     <?php else: ?>
-        <p class="msg-vide" style="color: gray; padding: 20px; text-align: center;">Aucun post pour le moment.</p>
+        <p class="msg-vide">Aucun post pour le moment.</p>
     <?php endif; ?>
 </section>
 <section id="likes-section" class="posts" style="display: none;">
@@ -107,6 +110,65 @@ require_once './process/profil_fetch.php';
     </main>
 
     <?php require './includes/nav-right.php'; ?>
+
+<div id="edit-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="left-header-modal">
+                <button class="close-button" type="button" onclick="closeEditModal()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"></path>
+                    </svg>
+                </button>
+                <h2>Éditer le profil</h2>
+            </div>
+            <button type="submit" form="edit-profil-form" class="save-button">Enregistrer</button>
+        </div>
+        
+        <form id="edit-profil-form" class="edit-profil-form" action="./process/edit_profil_process.php" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
+            
+            <div class="hero-edit">
+                <img class="banner-preview" src="assets/upload/banner/<?= htmlspecialchars($banner) ?>" alt="Bannière">
+                <div class="overlay-actions">
+                    <label for="banner-upload" class="icon-button">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                            <circle cx="12" cy="13" r="4"></circle>
+                        </svg>
+                    </label>
+                    <input type="file" name="banner" id="banner-upload" accept="image/png, image/jpeg, image/jpg" style="display: none;">
+                </div>
+            </div>
+
+            <div class="avatar-edit-container">
+                <div class="avatar-wrapper">
+                    <img class="avatar-preview" src="assets/upload/avatars/<?= htmlspecialchars($pp) ?>" alt="Avatar">
+                    <label for="avatar-upload" class="icon-button">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                            <circle cx="12" cy="13" r="4"></circle>
+                        </svg>
+                    </label>
+                    <input type="file" name="avatar" id="avatar-upload" accept="image/png, image/jpeg, image/jpg" style="display: none;">
+                </div>
+            </div>
+
+            <div class="form-body">
+                <div class="input-edit">
+                    <label>Nom</label>
+                    <input type="text" name="real_name" value="<?= htmlspecialchars($realName) ?>">
+                </div>
+
+                <div class="input-edit">
+                    <label>Bio</label>
+                    <textarea name="bio" rows="4"><?= htmlspecialchars($user['bio'] ?? '') ?></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
     <script src="assets/js/script-tabs.js"></script>
+    <script src="assets/js/script-modal.js"></script>
 </body>
 </html>

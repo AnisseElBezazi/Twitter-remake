@@ -151,7 +151,7 @@ li {
     gap: 5px;
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 9999;
     background: $noir;
     width: 100%;
     font-size: 1rem;
@@ -260,6 +260,15 @@ li {
       border-bottom: 1px solid $border;
       display: flex;
       gap: 20px;
+      position: relative;
+      .post-link {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+      }
       .left-post {
         display: flex;
         align-items: flex-start;
@@ -318,6 +327,9 @@ li {
             width: 100%;
             gap: 30px;
             color: $textinactif;
+            .like-link {
+              z-index: 100;
+            }
 
             .comment,
             .like {

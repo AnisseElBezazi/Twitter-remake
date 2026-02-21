@@ -14,9 +14,6 @@ require_once __DIR__ . '/includes/functions.php';
 </head>
 
 <body class="connexion-body">
-
-
-
     <div class="container-form">
         <div class="logo">FlixThread</div>
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : ven. 20 fév. 2026 à 21:14
+-- Généré le : sam. 21 fév. 2026 à 11:54
 -- Version du serveur : 8.4.3
 -- Version de PHP : 8.3.16
 
@@ -31,9 +31,17 @@ CREATE TABLE `comments` (
   `id` int NOT NULL,
   `post_id` int NOT NULL,
   `user_id` int NOT NULL,
-  `content` text NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `comments`
+--
+
+INSERT INTO `comments` (`id`, `post_id`, `user_id`, `content`, `created_at`) VALUES
+(5, 9, 1, 'complètement d\'accords', '2026-02-21 12:18:49'),
+(6, 18, 1, 'sqs', '2026-02-21 12:33:56');
 
 -- --------------------------------------------------------
 
@@ -45,7 +53,14 @@ CREATE TABLE `likes` (
   `user_id` int NOT NULL,
   `post_id` int NOT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `likes`
+--
+
+INSERT INTO `likes` (`user_id`, `post_id`, `created_at`) VALUES
+(1, 9, '2026-02-20 23:55:09');
 
 -- --------------------------------------------------------
 
@@ -55,11 +70,11 @@ CREATE TABLE `likes` (
 
 CREATE TABLE `movies` (
   `id` int NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `poster_path` varchar(255) DEFAULT NULL,
-  `description` text,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `poster_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `movies`
@@ -86,22 +101,17 @@ CREATE TABLE `posts` (
   `id` int NOT NULL,
   `user_id` int NOT NULL,
   `movie_id` int DEFAULT NULL,
-  `content` varchar(280) NOT NULL,
-  `image_path` varchar(255) DEFAULT NULL,
+  `content` varchar(280) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `posts`
 --
 
 INSERT INTO `posts` (`id`, `user_id`, `movie_id`, `content`, `image_path`, `created_at`) VALUES
-(1, 1, 1, 'Franchement la saison 2 d\'Arcane est une masterclass visuelle !', NULL, '2026-02-19 20:58:32'),
-(2, 3, 2, 'Est-ce que quelqu\'un sait quand sortent les prochains chapitres ?', NULL, '2026-02-19 20:58:32'),
-(3, 3, 3, 'Je viens de revoir Memento, je n\'ai toujours rien compris à la fin...', 'img-test.png', '2026-02-19 20:58:32'),
 (4, 4, NULL, 'Salam les rhey', NULL, '2026-02-20 15:46:57'),
-(5, 1, NULL, 'Test', NULL, '2026-02-20 18:46:35'),
-(6, 1, NULL, 'dssqdsq', NULL, '2026-02-20 19:03:20'),
 (7, 4, 1, 'Jinx est complètement fêlée, elle tire sur tout ce qui bouge. A Nanterre elle ne tiendrait même pas deux heures. Vi et sa coupe de cheveux éclatée, aucune prestance. Le Duc ne valide pas.', NULL, '2026-02-20 21:35:47'),
 (8, 4, 2, 'Un renard dans le ventre et ça fait le caïd. Naruto a passé 15 ans à courir après Sasuke le fuyard. Dans le 92 on ne court pas après les traîtres, on les éteint. Rasengan sur vos carrières. La piraterie n\'est jamais finie.', NULL, '2026-02-20 21:35:47'),
 (9, 4, 3, 'Le mec a plus de mémoire il se tatoue des post-it sur le torse. Achète un iPhone frérot. Oublier ses ennemis c\'est une faute grave. Moi je n\'oublie rien, la vengeance est un plat qui se mange glacé.', NULL, '2026-02-20 21:35:47'),
@@ -110,7 +120,8 @@ INSERT INTO `posts` (`id`, `user_id`, `movie_id`, `content`, `image_path`, `crea
 (12, 4, 6, 'Courir dans un labyrinthe poursuivi par des robots-araignées. Achetez un GPS les gars. Thomas fait le héros mais il a zéro cardio. C\'est sombre d\'être aussi perdu dans la vie.', NULL, '2026-02-20 21:35:47'),
 (13, 4, 7, 'Deux magiciens qui font des tours de passe-passe pour impressionner la galerie. La seule vraie magie c\'est de faire disparaître mes concurrents du top streaming.', NULL, '2026-02-20 21:35:47'),
 (14, 4, 8, 'Encore les Schtroumpfs bleus géants. Cette fois ils sont dans l\'eau. James Cameron a cru on avait 4 heures à perdre à regarder des poissons extraterrestres. Retournez dans votre arbre.', NULL, '2026-02-20 21:35:47'),
-(15, 4, 9, 'Cooper va dans l\'espace, il pleure devant des vidéos, il rentre sa fille a 100 ans. Grosse erreur de timing. Le temps c\'est de l\'argent, j\'ai pas le time pour les trous noirs.', NULL, '2026-02-20 21:35:47');
+(15, 4, 9, 'Cooper va dans l\'espace, il pleure devant des vidéos, il rentre sa fille a 100 ans. Grosse erreur de timing. Le temps c\'est de l\'argent, j\'ai pas le time pour les trous noirs.', NULL, '2026-02-20 21:35:47'),
+(18, 1, NULL, '😂', NULL, '2026-02-21 12:26:01');
 
 -- --------------------------------------------------------
 
@@ -120,23 +131,23 @@ INSERT INTO `posts` (`id`, `user_id`, `movie_id`, `content`, `image_path`, `crea
 
 CREATE TABLE `users` (
   `id` int NOT NULL,
-  `real_name` varchar(255) NOT NULL,
-  `pseudo` varchar(50) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `role` enum('admin','user') NOT NULL DEFAULT 'user',
-  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'profil-picture.jpg',
-  `bio` text,
+  `real_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pseudo` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` enum('admin','user') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
+  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'profil-picture.jpg',
+  `bio` text COLLATE utf8mb4_unicode_ci,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `banner` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'banner_default.jpg'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `banner` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'banner_default.jpg'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `users`
 --
 
 INSERT INTO `users` (`id`, `real_name`, `pseudo`, `email`, `password`, `role`, `avatar`, `bio`, `created_at`, `banner`) VALUES
-(1, 'Anisse', 'anisseel', 'anisse.elbezazi@gmail.com', '$2y$10$u3oE5iIKfb5sWz2G1s3vv.E0hfUpYejwcmpxhRD/bW1HmZVSVIKyC', 'user', 'profil-picture.jpg', NULL, '2026-02-19 20:28:37', 'banner_default.jpg'),
+(1, 'Anisse', 'anisseel', 'anisse.elbezazi@gmail.com', '$2y$10$u3oE5iIKfb5sWz2G1s3vv.E0hfUpYejwcmpxhRD/bW1HmZVSVIKyC', 'user', 'anisseel_avatar.jpg', '', '2026-02-19 20:28:37', 'anisseel_banner.jpg'),
 (2, 'Jinx', 'Jinx', 'jinx@zaun.com', 'password_hash', 'user', 'profil-picture.jpg', NULL, '2026-02-19 20:58:32', 'banner_default.jpg'),
 (3, '', 'sertyujkujhgfbdvcs', 'quefjkrgbhfkv@gmail.com', '$2y$10$nklVBlRbyPL2FThNAzvyT.WYCQXrE/tW9pr/krssU9UL/tHnmln/O', 'user', 'profil-picture.jpg', NULL, '2026-02-20 09:03:27', 'banner_default.jpg'),
 (4, 'Booba', 'B2O', 'Booba@gmail.com', '$2y$10$anb/r7ebhaIGbE0AYIpeIu1mo2afak6XSIWT3bThumws.AlWtJ1oa', 'user', 'B2O_avatar.jpg', 'fait belek  à B2O', '2026-02-20 15:44:35', 'B2O_banner.jpg');
@@ -190,7 +201,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `movies`
@@ -202,7 +213,7 @@ ALTER TABLE `movies`
 -- AUTO_INCREMENT pour la table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT pour la table `users`

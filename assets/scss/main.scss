@@ -32,6 +32,8 @@
 li {
   list-style-type: none;
 }
+
+//header.php
 .left-header {
   display: flex;
   flex-direction: column;
@@ -141,6 +143,8 @@ li {
     }
   }
 }
+
+//index.php
 .milieu-page {
   width: 100%;
   height: 100vh;
@@ -184,7 +188,7 @@ li {
         max-height: 70px;
         color: $white;
         &:focus {
-          outline: none; // Retire le contour lors du focus
+          outline: none;
         }
       }
     }
@@ -357,6 +361,8 @@ li {
     }
   }
 }
+
+//nav-right.php
 .droite-page {
   width: 500px;
   height: 100vh;
@@ -701,6 +707,7 @@ li {
     }
   }
 }
+
 // Modal boutton edit
 .modal {
   position: fixed;
@@ -902,6 +909,129 @@ li {
             resize: none;
           }
         }
+      }
+    }
+  }
+}
+
+// Modal ajout film admin
+
+.modal-content-movie {
+  background: $noir;
+  border-radius: 20px;
+  width: 100%;
+  color: $white;
+  max-width: 500px; // Un peu plus petit que le profil
+
+  .modal-header {
+    border-bottom: 1px solid $border;
+    margin-bottom: 20px;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .left-header-modal {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+
+      .close-button {
+        background: none;
+        border: none;
+        color: $white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+        border-radius: 999px;
+        transition: background-color 0.2s;
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+      }
+
+      h2 {
+        font-family: 'Arimo', sans-serif;
+        font-size: 1.25rem;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .add-movie-form {
+    padding: 0 20px 30px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      label {
+        font-size: 0.9rem;
+        color: $texttime;
+      }
+
+      input[type='text'] {
+        width: 100%;
+        padding: 12px;
+        background-color: transparent;
+        border: 1px solid $border;
+        border-radius: 8px;
+        color: $white;
+        font-size: 1rem;
+        transition: border-color 0.2s;
+
+        &:focus {
+          outline: none;
+          border-color: $primary;
+        }
+      }
+      input[type='file'] {
+        color: $textinactif;
+        font-size: 0.9rem;
+
+        &::-webkit-file-upload-button {
+          background-color: $hover;
+          border: 1px solid $border;
+          border-radius: 999px;
+          color: $white;
+          padding: 8px 16px;
+          margin-right: 15px;
+          cursor: pointer;
+          font-family: 'Arimo', sans-serif;
+          transition: 0.2s;
+
+          &:hover {
+            background-color: $border;
+          }
+        }
+      }
+    }
+
+    .primary-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $white;
+      font-size: 1rem;
+      font-weight: bold;
+      background-color: $primary;
+      padding: 12px;
+      width: 100%;
+      border-radius: 9999px;
+      margin-top: 10px;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+
+      &:hover {
+        background-color: $hover-primary;
       }
     }
   }

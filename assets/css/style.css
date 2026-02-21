@@ -179,6 +179,31 @@ li {
 .milieu-page .post-form .top-form .input-post:focus {
   outline: none;
 }
+.milieu-page .post-form .preview-container {
+  display: none;
+  padding: 0 20px 10px 75px;
+  position: relative;
+}
+.milieu-page .post-form .preview-container .preview-image {
+  max-width: 100%;
+  max-height: 400px;
+  border-radius: 16px;
+  object-fit: cover;
+}
+.milieu-page .post-form .preview-container .remove-preview {
+  position: absolute;
+  text-align: center;
+  top: 10px;
+  right: 30px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-weight: bold;
+}
 .milieu-page .post-form .bottom-form {
   width: 100%;
   position: relative;
@@ -305,6 +330,7 @@ li {
 }
 .milieu-page .posts .post .right-post .bottom-post .image-post img {
   width: 100%;
+  max-height: 400px;
   border-radius: 16px;
 }
 .milieu-page .posts .post .right-post .bottom-post .align-button {

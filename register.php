@@ -19,7 +19,7 @@ require_once __DIR__ . '/includes/functions.php';
     <div class="container-form">
         <div class="logo">FlixThread</div>
 
-        <form class="formulaire" action="./process/register_process.php" method="post">
+        <form id="register-form" class="formulaire" action="./process/register_process.php" method="post">
             <h1 class="title">S'inscrire</h1>
 
             <input class="input-formulaire" type="text" name="name" id="name" placeholder="Nom" required>
@@ -47,6 +47,7 @@ require_once __DIR__ . '/includes/functions.php';
             </div>
         </form>
     </div>
+    <script src="assets/js/local-storage.js"></script>
 </body>
 
 </html>

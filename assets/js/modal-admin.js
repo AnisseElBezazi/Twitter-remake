@@ -9,6 +9,14 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.style = 'margin: 16px 0 0 0; background: #e50914; color: #fff; border: none; border-radius: 6px; padding: 8px 18px; font-size: 1rem; cursor: pointer;';
         btn.onclick = openAddMovieModal;
         document.getElementById('admin-add-movie-btn-container').appendChild(btn);
+
+        document.querySelectorAll('.admin-delete-movie-btn').forEach(btn => {
+          btn.style.display = 'flex';
+          btn.addEventListener('click', function(e) {
+            e.preventDefault(); 
+            window.location.href = 'process/delete_movie_process.php?id=' + this.getAttribute('data-id');
+          });
+        });
       }
     });
 });

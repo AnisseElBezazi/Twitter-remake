@@ -151,6 +151,27 @@ li {
   padding: 20px 20px;
   border-bottom: 1px solid #3b4044;
 }
+.milieu-page .top .bar-recherche {
+  display: flex;
+  background-color: #3b4044;
+  gap: 10px;
+  color: #ffffff;
+  padding: 10px 20px;
+  width: 100%;
+  border-radius: 999px;
+  font-size: 0.8rem;
+}
+.milieu-page .top .bar-recherche::placeholder {
+  color: #a0a0a0;
+  opacity: 1;
+}
+.milieu-page .top .bar-recherche .research:focus {
+  outline: none;
+}
+.milieu-page .top .bar-recherche svg {
+  stroke: #71767b;
+  transition: stroke 0.2s ease;
+}
 .milieu-page .post-form {
   padding: 20px 20px 0px 20px;
   border-bottom: 1px solid #3b4044;

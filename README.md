@@ -71,8 +71,8 @@ DB_PASSWORD=
 
 ## Compte admin
 
-**Adresse email :** test@gmail.com
-**Mot de passe :** Salam92?
+- **Adresse email :** test@gmail.com
+- **Mot de passe :** Salam92?
 
 ## Auteurs
 

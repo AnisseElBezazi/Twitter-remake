@@ -5,12 +5,24 @@ FlixThread est un réseau social avec l'UX de Twitter(X) et L'UI de Netflix, per
 ## Fonctionnalités
 
 - **Système d'Authentification :** Inscription et connexion sécurisées.
-- **Profils Personnalisables :** Modification de la bio, du nom réel, de l'avatar et de la bannière.
+<img width="1916" height="996" alt="image" src="https://github.com/user-attachments/assets/d6607cd3-abea-4426-bf00-87c2314e1c33" />
+ **Profils Personnalisables :** Modification de la bio, du nom réel, de l'avatar et de la bannière.
+  <img width="1919" height="1197" alt="image" src="https://github.com/user-attachments/assets/2f65ef9d-4842-48b9-bc5e-11322a62892f" />
+
+
 - **Salons Thématiques :** Les discussions sont organisées par salons (films/séries) créés par les administrateurs.
+- <img width="374" height="1197" alt="image" src="https://github.com/user-attachments/assets/ff175e27-2f2c-4a55-a6f5-472fc4891d90" />
+
 - **Fils d'Actualité :** Publication textuels ou accompagnés d'image.
+- <img width="994" height="1199" alt="image" src="https://github.com/user-attachments/assets/414a0848-01aa-4b94-bed8-0414ea8a13c5" />
+
 - **Commentaires et Likes:** Commentaires sous les posts + Likes (Section like dans la page profil).
+- <img width="998" height="1199" alt="image" src="https://github.com/user-attachments/assets/f9d4dffc-b847-4994-996e-1765679da2ba" />
+
 - **Recherche :** Filtrage des salons et des posts via JavaScript.
 - **Administration :** Panel permettant d'ajouter ou de supprimer des salons.
+- <img width="452" height="1198" alt="image" src="https://github.com/user-attachments/assets/aa6babfa-738d-4828-95d0-c115430f4711" />
+
 
 ## Stack Technique & Environnement
 

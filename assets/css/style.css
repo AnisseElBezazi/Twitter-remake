@@ -999,4 +999,140 @@ li {
   background-color: #bb0a13;
 }
 
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999;
+}
+.modal .modal-content-post {
+  background: #000000;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #3b4044;
+}
+.modal .modal-content-post::-webkit-scrollbar {
+  display: none;
+}
+.modal .modal-content-post .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  position: sticky;
+  top: 0;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(5px);
+  z-index: 20;
+  border-bottom: 1px solid #3b4044;
+}
+.modal .modal-content-post .post-form {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.modal .modal-content-post .post-form .top-form {
+  display: flex;
+  gap: 20px;
+}
+.modal .modal-content-post .post-form .top-form .pp img {
+  width: 45px;
+  height: 45px;
+  border-radius: 9999px;
+  object-fit: cover;
+  object-position: center;
+}
+.modal .modal-content-post .post-form .top-form .input-post {
+  height: 120px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 1.2rem;
+  resize: none;
+  outline: none;
+  font-family: inherit;
+}
+.modal .modal-content-post .post-form .preview-container {
+  display: none;
+  position: relative;
+}
+.modal .modal-content-post .post-form .preview-container .preview-image {
+  max-width: 100%;
+  max-height: 400px;
+  border-radius: 16px;
+  object-fit: cover;
+}
+.modal .modal-content-post .post-form .preview-container .remove-preview {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+}
+.modal .modal-content-post .post-form .bottom-form {
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+}
+.modal .modal-content-post .post-form .bottom-form::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: #3b4044;
+}
+.modal .modal-content-post .post-form .bottom-form .upload-button {
+  background: none;
+  border-radius: 9999px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.modal .modal-content-post .post-form .bottom-form .upload-button:hover {
+  background: #141515;
+}
+.modal .modal-content-post .post-form .bottom-form .primary-button {
+  background-color: #e50914;
+  color: #ffffff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 9999px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.modal .modal-content-post .post-form .bottom-form .primary-button:hover {
+  background-color: #bb0a13;
+}
+
 /*# sourceMappingURL=style.css.map */

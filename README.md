@@ -2,26 +2,18 @@
 
 FlixThread est un réseau social avec l'UX de Twitter(X) et L'UI de Netflix, permettant aux utilisateurs de discuter dans des salons dédiés à des films et séries populaires.
 
+<img width="1919" height="1196" alt="image" src="https://github.com/user-attachments/assets/134c079f-72e5-4f34-844d-5ef0b52ba963" />
+
+
 ## Fonctionnalités
 
 - **Système d'Authentification :** Inscription et connexion sécurisées.
-  
-- <img width="571" height="709" alt="image" src="https://github.com/user-attachments/assets/3160d81a-93c9-47c6-9a21-e05dc7a6f648" />
-
- **Profils Personnalisables :** Modification de la bio, du nom réel, de l'avatar et de la bannière.
- 
-- <img width="746" height="710" alt="image" src="https://github.com/user-attachments/assets/c684bc86-c22e-477c-9fa7-a09641569db0" />
-
+- **Profils Personnalisables :** Modification de la bio, du nom réel, de l'avatar et de la bannière.
 - **Fils d'Actualité :** Publication textuels ou accompagnés d'image.
-- <img width="994" height="1199" alt="image" src="https://github.com/user-attachments/assets/414a0848-01aa-4b94-bed8-0414ea8a13c5" />
-
 - **Commentaires et Likes:** Commentaires sous les posts + Likes (Section like dans la page profil).
-- <img width="998" height="1199" alt="image" src="https://github.com/user-attachments/assets/f9d4dffc-b847-4994-996e-1765679da2ba" />
-
 - **Salons Thématiques :** Les discussions sont organisées par salons (films/séries) créés par les administrateurs.
 - **Recherche :** Filtrage des salons et des posts via JavaScript.
 - **Administration :** Panel permettant d'ajouter ou de supprimer des salons.
-- <img width="452" height="1198" alt="image" src="https://github.com/user-attachments/assets/aa6babfa-738d-4828-95d0-c115430f4711" />
 
 
 ## Stack Technique & Environnement

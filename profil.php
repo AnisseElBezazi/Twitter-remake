@@ -133,6 +133,11 @@ require_once './process/formatage_affichage.php';
                             </div>
                             <div class="bottom-post">
                                 <p class="message"><?= nl2br(htmlspecialchars($post['content'])) ?></p>
+                                <?php if (!empty($post['image_path'])): ?>
+                                    <div class="image-post">
+                                        <img src="assets/upload/posts/<?= htmlspecialchars($post['image_path']) ?>" />
+                                    </div>
+                                <?php endif; ?>
                                 <div class="align-button">
                                     <div class="comment">
                                         <a href="post_details.php?id=<?= $post['id'] ?>" style="display: flex; align-items: center; gap: 5px; text-decoration: none; color: inherit;">

@@ -25,7 +25,6 @@ require_once('./process/formatage_affichage.php');
     <main class="milieu-page">
         <div class="top">
             <h3><?= htmlspecialchars($currentMovieTitle) ?></h3>
-            </h3>
             <?php if ($movieId): ?>
                 <a href="index.php" style="color: var(--primary); font-size: 0.8rem;">Retour au flux global</a>
             <?php endif; ?>
@@ -45,8 +44,7 @@ require_once('./process/formatage_affichage.php');
                 <textarea
                     class="input-post"
                     name="content"
-                    placeholder="Quoi de neuf ?"
-                    required></textarea>
+                    placeholder="Quoi de neuf ?"></textarea>
             </div>
             <div id="preview-container" class="preview-container">
                 <img id="preview-image" class="preview-image" src="">

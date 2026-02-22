@@ -33,6 +33,29 @@ li {
   list-style-type: none;
 }
 
+.admin-delete-movie-btn {
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: $primary;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
 //header.php
 .left-header {
   display: flex;
@@ -127,6 +150,8 @@ li {
         width: 45px;
         height: 45px;
         border-radius: 9999px;
+        object-fit: cover;
+        object-position: center;
       }
     }
     .deconnexion {
@@ -201,6 +226,8 @@ li {
           width: 45px;
           height: 45px;
           border-radius: 9999px;
+          object-fit: cover;
+          object-position: center;
         }
       }
       .input-post {
@@ -333,6 +360,9 @@ li {
             width: 45px;
             height: 45px;
             border-radius: 9999px;
+            object-fit: cover;
+
+            object-position: center;
           }
         }
       }

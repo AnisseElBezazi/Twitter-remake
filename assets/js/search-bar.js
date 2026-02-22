@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const searchInput = document.querySelector('.research');
+  const searchInput = document.querySelector('.research-movie');
   const movieCards = document.querySelectorAll('.card-link');
 
   searchInput.addEventListener('input', (e) => {

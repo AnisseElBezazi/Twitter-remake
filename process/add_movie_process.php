@@ -8,7 +8,14 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['pseudo'])) {
     exit();
 }
 
-function is_admin($pdo, $user_id) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!isset($_POST['csrf_token']) || !verify_csrf_token($_POST['csrf_token'])) {
+        die("Erreur de sécurité : Jeton CSRF invalide.");
+    }
+}
+
+function is_admin($pdo, $user_id)
+{
     $stmt = $pdo->prepare('SELECT role FROM users WHERE id = ?');
     $stmt->execute([$user_id]);
     return $stmt->fetchColumn() === 'admin';
@@ -28,11 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $ext = strtolower(pathinfo($poster['name'], PATHINFO_EXTENSION));
-    if (!in_array($ext, ['jpg', 'jpeg', 'png', 'webp'])) {
+    if (!in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'avif'])) {
         die('Erreur : Format non autorisé.');
     }
-    
-// uniqid c pour générer un nom de fichier unique
+
+    // uniqid c pour générer un nom de fichier unique
     $fileName = uniqid() . '.' . $ext;
     if (move_uploaded_file($poster['tmp_name'], '../assets/img/' . $fileName)) {
         $stmt = $pdo->prepare('INSERT INTO movies (title, poster_path) VALUES (?, ?)');

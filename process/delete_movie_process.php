@@ -6,6 +6,8 @@ if (!isset($_SESSION['user_id'])) {
     die('Non autorisé.');
 }
 
+
+
 $stmt = $pdo->prepare('SELECT role FROM users WHERE id = ?');
 $stmt->execute([$_SESSION['user_id']]);
 if ($stmt->fetchColumn() !== 'admin') {

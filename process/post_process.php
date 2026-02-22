@@ -2,9 +2,7 @@
 require_once('../includes/security.php');
 require_once('../includes/functions.php');
 require_once('../config/database.php');
-echo '<pre>';
-var_dump($_SESSION);
-echo '</pre>';
+
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: ../index.php");
@@ -23,8 +21,10 @@ $content = trim($_POST['content']);
 $movieId = !empty($_POST['movie_id']) ? (int)$_POST['movie_id'] : null;
 $userId = $_SESSION['user_id'];
 
-if (empty($content)) {
-    die("Erreur : Le message ne peut pas être vide.");
+$hasImage = (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK);
+
+if (empty($content) && !$hasImage) {
+    die("Erreur : Vous devez envoyer au moins un message ou une image.");
 }
 
 $imagePath = null;
